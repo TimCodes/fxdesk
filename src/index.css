@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: 100%;
+  width: 100%;
+  background: #303030;
+}
+
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+.whiteIcon{
+  color:white
+}
+
+.main{
+  background: blue;
+}
+
+.test{
+  background:darkslategray;
+  height: 700px;
+}

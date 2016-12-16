@@ -1,15 +1,23 @@
-"use strict";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router } from 'react-router';
 
-import React from "react";
 import { scaleTime } from "d3-scale";
-
+import { tsvParse } from  "d3-dsv";
+import { timeParse } from "d3-time-format";
 import { ChartCanvas, Chart, series, scale, coordinates, tooltip, axes, indicator, helper } from "react-stockcharts";
+import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from 'semantic-ui-react'
 
 var { CandlestickSeries } = series;
 var { XAxis, YAxis } = axes;
 var { fitWidth } = helper;
 
+
+
 class CandleStickChart extends React.Component {
+
+	// maybe conditionally render this dependining 
+	// if data is there or not
 	render() {
 		var { type, width, data, ratio } = this.props;
 		return (

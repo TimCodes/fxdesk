@@ -5,6 +5,10 @@ import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from '
 import CandleStickChart from './candlestick'
 import ChartSidebar from './components/ChartSidebar';
 import TradeTracker from './components/TradeTracker';
+import TradeHistroy from './components/TradeHistroy';
+import TradeTool from './components/TradeTool';
+
+
 
 import logo from './logo.svg';
 import './App.css';
@@ -39,18 +43,20 @@ class App extends Component {
             </div>
           </div>
           <div className = "ui container">
-           <TradeTracker />
+            <TradeTracker />
           </div> 
         </div>    
     )
   }
 }
 
-// <Route path="/" component={Main}>
-//             <Route path="profile/:username" component={Profile} />
-//             <IndexRoute component={Home} />
-//           </Route>
-//           <CandleStickChart data={this.props.data} type={'hybrid'} />
+//  <Router>
+//            <Route path="/" component={TradeTracker}>
+//               <Route path="profile/:username" component={TradeTool} />
+//               <IndexRoute component={TradeTracker} />
+//             </Route>
+//           </Router>  
+// <CandleStickChart data={this.props.data} type={'hybrid'} />
 
 function chartWrapper(data ){
 

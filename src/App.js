@@ -4,6 +4,10 @@ import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from '
 
 
 import CandleStickChart from './candlestick'
+
+import ChartSidebar from './components/ChartSidebar';
+
+
 import logo from './logo.svg';
 import './App.css';
 
@@ -29,44 +33,30 @@ class App extends Component {
     const { visible } = this.state
     return (
         <div className ="basic minimal pushable">
-          <Sidebar as={Menu} animation='overlay' width='very thin' visible={visible} icon='labeled' vertical inverted>
-           <Menu fluid vertical inverted size='mini' className= "main"  color="blue" >
-            <Menu.Item name='home' data-content="Play Music" fitted>
-              <Icon name='home' className = "whiteIcon" />
-            </Menu.Item>
-            <Menu.Item name='calculator' fitted>
-              <Icon name='line chart' className = "whiteIcon" />
-            </Menu.Item>
-             <Menu.Item name='gamepad' fitted>
-              <Icon name='file text' className = "whiteIcon" />
-            </Menu.Item>
-            <Menu.Item name='gamepad' fitted>
-              <Icon name='folder' className = "whiteIcon" />
-            </Menu.Item>
-            <Menu.Item name='gamepad' fitted>
-              <Icon name='calendar' className = "whiteIcon" />
-            </Menu.Item>
-            <Menu.Item name='calculator' fitted>
-              <Icon name='newspaper' className = "whiteIcon" />
-            </Menu.Item>
-            <Menu.Item name='calculator' fitted>
-              <Icon name='calculator' className = "whiteIcon" />
-            </Menu.Item>
-          
-           </Menu> 
-          </Sidebar>
-         
+          <ChartSidebar   visible={this.state.visible} />
          <div className = "ui container fluid "  onClick={this.dimVisibility}> 
           <div className="ui black small launch right attached fixed button" onClick={this.toggleVisibility}>
           <i className="content icon"></i>
           
         </div>
-         <CandleStickChart data={this.props.data} type={'hybrid'} />
+      
+          <CandleStickChart data={this.props.data} type={'hybrid'} />
          </div>
        </div>
     )
   }
 }
+
+
+function chartWrapper(data ){
+
+
+}
+
+  // <Route path="/" component={Main}>
+        //     <Route path="profile/:username" component={Profile} />
+        //     <IndexRoute component={Home} />
+        //   </Route>
 
 export default App;
 

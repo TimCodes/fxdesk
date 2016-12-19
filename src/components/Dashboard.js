@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Sidebar, Menu, Icon } from 'semantic-ui-react'
 
 
-class EconomicCalender extends Component {
+class Dashboard extends Component {
 
     render(){ return (
-        <div> Economic calnder will go here </div>   
+        <div> Dashboard will go here </div>   
     )    
     }
 }
 
-export default EconomicCalender;
+export default Dashboard;

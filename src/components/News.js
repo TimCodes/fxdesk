@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Sidebar, Menu, Icon } from 'semantic-ui-react'
 
 
-class EconomicCalender extends Component {
+class News extends Component {
 
     render(){ return (
         <div> Economic calnder will go here </div>   
@@ -10,4 +10,4 @@ class EconomicCalender extends Component {
     }
 }
 
-export default EconomicCalender;
+export default News;

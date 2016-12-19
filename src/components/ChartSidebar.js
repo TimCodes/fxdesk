@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { Sidebar, Menu, Icon } from 'semantic-ui-react'
 
 
@@ -11,12 +12,12 @@ class ChartSidebar extends Component {
               <Icon name='home' className = "whiteIcon" />
             </Menu.Item>
             <Menu.Item name='calculator' fitted>
-              <Icon name='line chart' className = "whiteIcon" />
+              <Link to="/tools"><Icon name='line chart' className = "whiteIcon" /></Link>
             </Menu.Item>
              <Menu.Item name='gamepad' fitted>
               <Icon name='file text' className = "whiteIcon" />
             </Menu.Item>
-            <Menu.Item name='gamepad' fitted>
+            <Menu.Item name='gamepad' fitted >
               <Icon name='folder' className = "whiteIcon" />
             </Menu.Item>
             <Menu.Item name='gamepad' fitted>

@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { Router, Route, hashHistory, IndexRoute} from 'react-router';
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from 'semantic-ui-react'
 
-import CandleStickChart from './candlestick'
-import ChartSidebar from './components/ChartSidebar';
-import TradeTracker from './components/TradeTracker';
-import TradeHistroy from './components/TradeHistroy';
-import TradeTool from './components/TradeTool';
+import CandleStickChart from './candlestick';
+import ChartSidebar     from './components/ChartSidebar';
+import TradeTracker     from './components/TradeTracker';
+import TradeHistroy     from './components/TradeHistroy';
+import TradeTool        from './components/TradeTool';
+import News             from './components/News';
+import Dashboard        from './components/Dashboard';
+import EconomicCalender from './components/EconomicCalender';
+
+
 
 
 
@@ -43,19 +48,19 @@ class App extends Component {
             </div>
           </div>
           <div className = "ui container">
-            <TradeTracker />
+          <Router  history={hashHistory}>
+           <Route path="/" component={TradeTracker}>
+              <Route path="/tools" component={TradeTool} />
+              <IndexRoute component={TradeTracker} />
+            </Route>
+           </Router>  
           </div> 
         </div>    
     )
   }
 }
 
-//  <Router>
-//            <Route path="/" component={TradeTracker}>
-//               <Route path="profile/:username" component={TradeTool} />
-//               <IndexRoute component={TradeTracker} />
-//             </Route>
-//           </Router>  
+
 // <CandleStickChart data={this.props.data} type={'hybrid'} />
 
 function chartWrapper(data ){

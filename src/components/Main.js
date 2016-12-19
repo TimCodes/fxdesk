@@ -37,7 +37,6 @@ class Main extends Component {
               <i className="content icon"></i>
             </div>
           </div>
-          <Link to="/tools"> tools </Link>
           <div className = "ui container">
             {this.props.children}
           </div> 

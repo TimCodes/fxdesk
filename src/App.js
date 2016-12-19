@@ -25,7 +25,8 @@ class App extends Component{
         <Route path="charts" component={CandleStickChart} />
         <Route path="tools" component={TradeTool} />
         <Route path="trades" component={TradeTracker} />
-        <Route path="tools" component={Dashboard} />
+        <Route path="dashboard" component={Dashboard} />
+        <Route path="calender" component={EconomicCalender} />
         <IndexRoute component={Dashboard} />
        </Route>
      </Router>

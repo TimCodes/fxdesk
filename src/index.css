@@ -24,3 +24,14 @@ body {
   background:darkslategray;
   height: 700px;
 }
+
+.red-bg{
+  background-color: red;
+  height: 100%;
+  width: 100%;
+}
+
+.blue-bg {
+  background-color: blue ;
+ 
+}

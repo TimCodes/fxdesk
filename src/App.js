@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Router, Route, hashHistory, IndexRoute} from 'react-router';
+import { Router, Route, hashHistory, IndexRoute, Link} from 'react-router';
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from 'semantic-ui-react'
 
-import CandleStickChart from './candlestick';
+import CandleStickChart from './components/candlestick';
 import ChartSidebar     from './components/ChartSidebar';
 import TradeTracker     from './components/TradeTracker';
 import TradeHistroy     from './components/TradeHistroy';
@@ -10,56 +10,28 @@ import TradeTool        from './components/TradeTool';
 import News             from './components/News';
 import Dashboard        from './components/Dashboard';
 import EconomicCalender from './components/EconomicCalender';
-
-
+import Main             from './components/Main';
 
 
 
 import logo from './logo.svg';
 import './App.css';
 
-
-
-class App extends Component {
- 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      data:  [],
-      visible: false
-      
-    };
-  }
-  toggleVisibility = () => this.setState({ visible: !this.state.visible })
-  dimVisibility = (e) => {
-    console.log(e)
-    //this.setState({ visible:false })
-  }
-
-  render() {
-    const { visible } = this.state
+class App extends Component{
+  render(){ 
     return (
-        <div className ="ui basic minimal pushable"  onClick={this.dimVisibility}>
-          <ChartSidebar   visible={this.state.visible} />
-          <div className = "ui container fluid " > 
-            <div className="ui black small launch right attached fixed button" onClick={this.toggleVisibility}>
-              <i className="content icon"></i>
-            </div>
-          </div>
-          <div className = "ui container">
-          <Router  history={hashHistory}>
-           <Route path="/" component={TradeTracker}>
-              <Route path="/tools" component={TradeTool} />
-              <IndexRoute component={TradeTracker} />
-            </Route>
-           </Router>  
-          </div> 
-        </div>    
-    )
+     <Router history={hashHistory}>
+      <Route path="/" component={Main}>
+        <Route path="charts" component={CandleStickChart} />
+        <Route path="tools" component={TradeTool} />
+        <Route path="trades" component={TradeTracker} />
+        <Route path="tools" component={Dashboard} />
+        <IndexRoute component={Dashboard} />
+       </Route>
+     </Router>
+    ) 
   }
 }
-
 
 // <CandleStickChart data={this.props.data} type={'hybrid'} />
 

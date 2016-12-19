@@ -9,7 +9,7 @@ import { ChartCanvas, Chart, series, scale, coordinates, tooltip, axes, indicato
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from 'semantic-ui-react'
 
 
-import CandleStickChart from "./candlestick";
+import CandleStickChart from "./components/candlestick";
 import App from './App';
 import './index.css';
 var { CandlestickSeries } = series;

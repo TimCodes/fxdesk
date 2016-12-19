@@ -11,11 +11,11 @@ class ChartSidebar extends Component {
             <Menu.Item name='home' data-content="Play Music" fitted>
               <Icon name='home' className = "whiteIcon" />
             </Menu.Item>
-            <Menu.Item name='calculator' fitted>
-              <Link to="/tools"><Icon name='line chart' className = "whiteIcon" /></Link>
+            <Menu.Item name='charts' fitted>
+              <Link to="charts"><Icon name='line chart' className = "whiteIcon" /></Link>
             </Menu.Item>
-             <Menu.Item name='gamepad' fitted>
-              <Icon name='file text' className = "whiteIcon" />
+             <Menu.Item name='trades' fitted>
+              <Link to="trades"><Icon name='file text' className = "whiteIcon" /></Link>
             </Menu.Item>
             <Menu.Item name='gamepad' fitted >
               <Icon name='folder' className = "whiteIcon" />
@@ -24,7 +24,7 @@ class ChartSidebar extends Component {
               <Icon name='calendar' className = "whiteIcon" />
             </Menu.Item>
             <Menu.Item name='calculator' fitted>
-              <Icon name='newspaper' className = "whiteIcon" />
+              <Link to="tools"><Icon name='newspaper' className = "whiteIcon" /></Link>
             </Menu.Item>
             <Menu.Item name='calculator' fitted>
               <Icon name='calculator' className = "whiteIcon" />

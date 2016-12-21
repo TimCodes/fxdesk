@@ -10,6 +10,7 @@
     "d3-dsv": "^1.0.3",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
+    "react-dropzone": "^3.7.3",
     "react-router": "^3.0.0",
     "react-stockcharts": "^0.6.0-beta.11",
     "semantic-ui-react": "^0.62.1"

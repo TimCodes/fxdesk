@@ -3,6 +3,7 @@ import { Router, Route, hashHistory, IndexRoute, Link} from 'react-router';
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from 'semantic-ui-react'
 
 import CandleStickChart from './components/candlestick';
+import CandleStickWrapper from './components/CandleStickWrapper';
 import ChartSidebar     from './components/ChartSidebar';
 import TradeTracker     from './components/TradeTracker';
 import TradeHistroy     from './components/TradeHistroy';
@@ -22,7 +23,7 @@ class App extends Component{
     return (
      <Router history={hashHistory}>
       <Route path="/" component={Main}>
-        <Route path="charts" component={CandleStickChart} />
+        <Route path="charts" component={CandleStickWrapper} />
         <Route path="tools" component={TradeTool} />
         <Route path="trades" component={TradeTracker} />
         <Route path="dashboard" component={Dashboard} />

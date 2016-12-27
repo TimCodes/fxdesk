@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { Router, Route, hashHistory, IndexRoute, Link} from 'react-router';
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from 'semantic-ui-react'
 
-import CandleStickChart from './components/candlestick';
+import CandleStickChart   from './components/candlestick';
 import CandleStickWrapper from './components/CandleStickWrapper';
-import ChartSidebar     from './components/ChartSidebar';
-import TradeTracker     from './components/TradeTracker';
-import TradeHistroy     from './components/TradeHistroy';
-import TradeTool        from './components/TradeTool';
-import News             from './components/News';
-import Dashboard        from './components/Dashboard';
-import EconomicCalender from './components/EconomicCalender';
-import Main             from './components/Main';
+import ChartSidebar       from './components/ChartSidebar';
+import TradeTracker       from './components/TradeTracker';
+import TradeHistory       from './components/TradeHistory';
+import TradeTool          from './components/TradeTool';
+import News               from './components/News';
+import Dashboard          from './components/Dashboard';
+import Portfolio          from './components/Portfolio';
+import EconomicCalender   from './components/EconomicCalender';
+import Main               from './components/Main';
 
 
 
@@ -26,6 +27,8 @@ class App extends Component{
         <Route path="charts" component={CandleStickWrapper} />
         <Route path="tools" component={TradeTool} />
         <Route path="trades" component={TradeTracker} />
+        <Route path="history" component={TradeHistory} />        
+        <Route path="news" component={News} />
         <Route path="dashboard" component={Dashboard} />
         <Route path="calender" component={EconomicCalender} />
         <IndexRoute component={Dashboard} />

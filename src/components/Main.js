@@ -30,7 +30,7 @@ class Main extends Component {
   render() {
     const { visible } = this.state
     return (
-        <div className ="ui basic minimal pushable"  onClick={this.dimVisibility}>
+        <div className =""  onClick={this.dimVisibility}>
           <ChartSidebar   visible={this.state.visible} />
           <div className = "ui container fluid " > 
             <div className="ui black small launch right attached fixed button" onClick={this.toggleVisibility}>

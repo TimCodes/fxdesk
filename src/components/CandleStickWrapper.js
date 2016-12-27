@@ -10,14 +10,15 @@ class CandleStickWrapper extends React.Component {
         this.state = {
             data : []
         }
+        this.dataService = new TradeDataService();
     }
     componentWillMount(){
-        return  TradeDataService.getTestData()
+        return  this.dataService.getTestData()
             .then(chartData => {
                 console.log(this.data)
                 this.setState({
                     data : chartData
-                }).bind(this)
+            })
             }).catch(e => console.log(e))
     }
 
@@ -25,7 +26,7 @@ class CandleStickWrapper extends React.Component {
         console.log(this.state)
         let view = <div> </div>;
 
-        if(this.state.data.lenght > 0 ){
+        if(this.state.data.length > 0 ){
             view = <CandleStickChart data={this.state.data} type={'hybrid'} />
         } 
         return(

@@ -5,7 +5,7 @@ import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from '
 import CandleStickChart   from './components/candlestick';
 import CandleStickWrapper from './components/CandleStickWrapper';
 import ChartSidebar       from './components/ChartSidebar';
-import TradeTracker       from './components/TradeTracker';
+import TradeTracker       from './components/TradeTacker/TradeTracker';
 import TradeHistory       from './components/TradeHistory';
 import TradeTool          from './components/TradeTool';
 import News               from './components/News';

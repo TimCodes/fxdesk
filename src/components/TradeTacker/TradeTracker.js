@@ -14,10 +14,11 @@ import TradeTrackerForm    from './TradeTrackerForm'
     class TradeTracker extends Component {
 
         constructor(){
+           
             super();
-
+             this.dataService = new TradeTrackerService();
             this.state = {
-                data:  [1,2,3,4],
+                data:  this.dataService.getTrades(),
                 visible: true,
                 showModal : false
             };

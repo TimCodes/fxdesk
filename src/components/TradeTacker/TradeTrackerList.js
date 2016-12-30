@@ -10,7 +10,7 @@ const trigger = (
 class TradeTrackerList extends Component {
         render(){ return (
             <Grid>
-            {this.props.trades.map( (e, idx) => {
+            {this.props.trades.map( (t, idx) => {
                 return (   
                 <Grid.Column  computer={8} mobile = {16}>      
                 <Card color='green' key = {idx}  fluid className = "blue-bg"> 
@@ -24,14 +24,14 @@ class TradeTrackerList extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                         <Card.Header>
-                        EURUSD
+                        {t.pair}
                         </Card.Header>
                         <Card.Meta>
-                        BUY
+                        {t.side}
                         </Card.Meta>
                         <Card.Description>
                         <Segment color = 'blue' inverted textAlign= 'center' 	>
-                            Opened
+                           {t.status}
                         </Segment>
                         </Card.Description>
                     </Card.Content>

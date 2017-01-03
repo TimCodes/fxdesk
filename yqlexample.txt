@@ -1,0 +1,5 @@
+http://query.yahooapis.com/v1/public/yql?q=
+select * from yahoo.finance.historicaldata where symbol = "EUR=X" and startDate = "2009-09-11" and endDate = "2010-03-10"
+&format=json
+&diagnostics=true
+&env=store://datatables.org/alltableswithkeys

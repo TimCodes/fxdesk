@@ -42,11 +42,12 @@ class TradeTrackerService {
     }
 
     create(trade){
-        this.trades.push(trade);
+        this.trades.push(trade); 
     };
 
     update(tradeIdx, updatedTrade){
         this.trades[tradeIdx] = updatedTrade;
+        console.log("update trade service", tradeIdx, updatedTrade)
     };
 
     delete(idx){

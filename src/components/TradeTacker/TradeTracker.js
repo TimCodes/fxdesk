@@ -3,8 +3,11 @@ import { Button, Card, Image, Segment, Flag, Dropdown, Grid, Header, Icon, Modal
 import Dropzone from 'react-dropzone';
 
 import TradeTrackerService from '../../utils/TradeTrackerService';
+import TradeHistoryService from '../../utils/TradeHistoryService';
+
 import TradeTrackerList    from './TradeTrackerList';
 import TradeTrackerForm    from './TradeTrackerForm'
+import TradeCloseForm      from './TradeCloseForm'
 import TradeTrackerDetails from './TradeTrackerDetails';
 
     const trigger = (

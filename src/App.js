@@ -6,7 +6,7 @@ import CandleStickChart   from './components/candlestick';
 import CandleStickWrapper from './components/CandleStickWrapper';
 import ChartSidebar       from './components/ChartSidebar';
 import TradeTracker       from './components/TradeTacker/TradeTracker';
-import TradeHistory       from './components/TradeHistory';
+import TradePortfolio     from './components/TradePortfolio/TradePortfolio';
 import TradeTool          from './components/TradeTool';
 import News               from './components/News';
 import Dashboard          from './components/Dashboard';
@@ -27,7 +27,7 @@ class App extends Component{
         <Route path="charts" component={CandleStickWrapper} />
         <Route path="tools" component={TradeTool} />
         <Route path="trades" component={TradeTracker} />
-        <Route path="history" component={TradeHistory} />        
+        <Route path="history" component={TradePortfolio} />        
         <Route path="news" component={News} />
         <Route path="dashboard" component={Dashboard} />
         <Route path="calender" component={EconomicCalender} />

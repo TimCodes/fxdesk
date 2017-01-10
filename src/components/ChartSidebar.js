@@ -20,12 +20,12 @@ class ChartSidebar extends Component {
             </Link> 
             <Link to="trades">
               <Menu.Item name='trades' fitted>
-              <Icon name='file text' className = "whiteIcon" />
+              <Icon name='film' className = "whiteIcon" />
               </Menu.Item>
             </Link>  
             <Link to = "history">
               <Menu.Item name='history' fitted >
-                <Icon name='folder' className = "whiteIcon" />
+                <Icon name='book' className = "whiteIcon" />
               </Menu.Item>
             </Link>
             <Link to="calender">

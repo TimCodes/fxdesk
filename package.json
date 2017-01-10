@@ -6,7 +6,7 @@
     "react-scripts": "0.8.4"
   },
   "dependencies": {
-    "d3": "^4.4.0",
+    "d3": "^4.4.1",
     "d3-dsv": "^1.0.3",
     "d3-scale": "^1.0.4",
     "d3-time-format": "^2.0.3",

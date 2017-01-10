@@ -3,36 +3,51 @@ import { Button, Card, Image, Segment, Flag, Dropdown, Grid, Header, Icon, Modal
 import Dropzone from 'react-dropzone';
 
 import TradeTrackerService from '../../utils/TradeTrackerService';
+import TradeHistoryService from '../../utils/TradeHistoryService';
+
 import TradeTrackerList    from './TradeTrackerList';
 import TradeTrackerForm    from './TradeTrackerForm'
+import TradeCloseForm      from './TradeCloseForm'
+import TradeTrackerDetails from './TradeTrackerDetails';
 
     const trigger = (
     <i className="ellipsis vertical icon right floated"></i>
     )
 
-
-    class TradeTracker extends Component {
+    // TODO : refactor fucntion naems foor 
+    // actions that just change view
+    // eg. close should be closeViewShow
+class TradeTracker extends Component {
 
         constructor(){
            
             super();
-            this.dataService = new TradeTrackerService();
+            this.tradeTrackerService = new TradeTrackerService();
+            this.TradeHistoryService = new TradeHistoryService();
+            
             this.state = {
-                data:  this.dataService.getTrades(),
+                data:  this.tradeTrackerService.getTrades(),
                 visible: true,
-                showModal : false,
+                showFormModal : false,
+                showDetailsModal : false,
+                showCloseFormModal: false, 
                 trade : {},
                 tradeIdx: null,
                 tradeAction: null
             };
 
-            this.showModalVis = this.showModalVis.bind(this);
-            this.hideModalVis = this.hideModalVis.bind(this);
-            this.addTrade     = this.addTrade.bind(this);
-            this.editTrade    = this.editTrade.bind(this);
-            this.newTrade     = this.newTrade.bind(this);
-            this.handleSave   = this.handleSave.bind(this)
-            this.updateTrade  = this.updateTrade.bind(this)
+            this.showModalVis       = this.showModalVis.bind(this);
+            this.hideModalVis       = this.hideModalVis.bind(this);
+            this.hideDetailModal    = this.hideDetailModal.bind(this);
+            this.hideCloseFormModal = this.hideCloseFormModal.bind(this);
+            this.addTrade           = this.addTrade.bind(this);
+            this.showEditTradeView  = this.showEditTradeView.bind(this);
+            this.newTrade           = this.newTrade.bind(this);
+            this.handleSave         = this.handleSave.bind(this)
+            this.updateTrade        = this.updateTrade.bind(this)
+            this.showViewTrade      = this.showViewTrade.bind(this);
+            this.showCloseTradeView = this.showCloseTradeView.bind(this);
+            this.deleteTrade        = this.deleteTrade.bind(this);
         }
         
         newTrade(){
@@ -45,29 +60,43 @@ import TradeTrackerForm    from './TradeTrackerForm'
         showModalVis(){
             console.log("set mdal vias")
             this.setState({
-                showModal: true
+                showFormModal: true
             })
         }
 
         hideModalVis(){
             this.setState({
-                showModal: false
+                showFormModal: false
+            })
+        }
+
+        hideDetailModal(){
+            this.setState({
+                showDetailsModal: false
+            })
+        }
+
+        hideCloseFormModal(){
+            this.setState({
+                showCloseFormModal: false
             })
         }
 
         addTrade(trade){
-            this.dataService.create(trade);
-            this.setState({
-                data : this.dataService.getTrades()
-            })
+            this.tradeTrackerService.create(trade);
+            this.updateTradeList();
         }
 
         updateTrade(trade, tradeIdx){
-            this.dataService.update(tradeIdx, trade)
-             this.setState({
-                data : this.dataService.getTrades()
-            })
+            this.tradeTrackerService.update(tradeIdx, trade)
+            this.updateTradeList();
             console.log("update trade ")
+        }
+
+        updateTradeList(){
+           this.setState({
+                data : this.tradeTrackerService.getTrades()
+            })
         }
 
         handleSave(trade){
@@ -75,13 +104,15 @@ import TradeTrackerForm    from './TradeTrackerForm'
                 this.addTrade(trade)   
             }else if(this.state.tradeAction === "EDIT"){
                 this.updateTrade(trade,this.state.tradeIdx)
+            }else if(this.state.tradeAction === "CLOSE"){
+              this.TradeHistoryService.create(trade);
+              this.tradeTrackerService.delete(this.state.tradeIdx);
             }
 
             this.hideModalVis();
         }
         
-        editTrade(trade, newTradeIdx){
-            console.log('eidit trade', newTradeIdx)
+        showEditTradeView(trade, newTradeIdx){
             this.setState({
                 trade: trade,
                 tradeAction: 'EDIT',
@@ -89,27 +120,68 @@ import TradeTrackerForm    from './TradeTrackerForm'
             }, this.showModalVis)
         }
        
+        showViewTrade(viewTrade){
+          this.setState({
+                showDetailsModal: true,
+                trade : viewTrade
+            })
+        }
+
+        showCloseTradeView(cTrade, cIdx){
+            this.setState(
+                {
+                    showCloseFormModal: true,
+                    trade: cTrade,
+                    tradeAction: 'CLOSE',
+                    tradeIdx: cIdx
+                }
+            )
+        }
+
+        deleteTrade(trade, tradeIdx){
+            this.tradeTrackerService.delete(tradeIdx)
+            this.updateTradeList();
+        }
      
 
-        render(){
-             return (
-                <div className = "ui container" >
-                    <Header as='h1' color = "pink" textAlign = 'center'>
-                        Trade Tracker  
-                    <Icon className= "right-algn" name='plus' onClick = {this.newTrade}></Icon>
-                    </Header>
-                <TradeTrackerList trades = {this.state.data} editTrade = {this.editTrade}   />
+
+        render(){ 
+            return (
+            <div className = "ui container" >
+                <Header as='h1' color = "pink" textAlign = 'center'>
+                    Trade Tracker  
+                <Icon className= "right-algn" name='plus' onClick = {this.newTrade}></Icon>
+                </Header>
+                <TradeTrackerList 
+                    trades      = {this.state.data} 
+                    editTrade   = {this.showEditTradeView}  
+                    viewTrade   = {this.showViewTrade}
+                    deleteTrade = {this.deleteTrade}
+                    closeTrade  = {this.showCloseTradeView}
+                />
                 <TradeTrackerForm 
-                    showModal = {this.state.showModal} 
+                    showModal = {this.state.showFormModal} 
                     hideModal = {this.hideModalVis} 
                     passData  = {this.handleSave} 
                     trade     = {this.state.trade}
                     action    = {this.state.tradeAction}
                 />
-                </div> 
+                <TradeCloseForm 
+                    showModal = {this.state.showCloseFormModal} 
+                    hideModal = {this.hideCloseFormModal} 
+                    passData  = {this.handleSave} 
+                    trade     = {this.state.trade}
+                />
+                <TradeTrackerDetails
+                    showModal  = {this.state.showDetailsModal}
+                    trade      = {this.state.trade}
+                    hideModal  = {this.hideDetailModal}
+                />
+            </div> 
+
         )    
         }
-    }
+}
 
     export default TradeTracker;
 

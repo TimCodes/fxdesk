@@ -41,3 +41,9 @@ body {
   right:30px;
   top:30px;
 }
+
+.close-btn{
+  position: absolute;
+  right:10px;
+  top:10px;
+}

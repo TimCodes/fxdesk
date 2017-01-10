@@ -3,7 +3,7 @@ import { Router, Route, hashHistory, IndexRoute, Link} from 'react-router';
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from 'semantic-ui-react'
 
 
-import ChartSidebar     from './ChartSidebar';
+import ChartSidebar  from './ChartSidebar';
 
 import logo from '../logo.svg';
 import '../App.css';

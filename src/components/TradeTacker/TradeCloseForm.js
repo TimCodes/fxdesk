@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone';
 
 
 
-class TradeTrackerForm extends Component {
+class TradeCloseForm extends Component {
 
    constructor(props) {
     super(props);
@@ -62,15 +62,27 @@ class TradeTrackerForm extends Component {
                  </Form.Field>
                  <Form.Field>
                    <label>Status</label>
-                   <input placeholder='Tracking' value = {this.state.formData.status}  onChange = {this.handleChange} name = "status" />
+                   <input placeholder='WIN' value = {this.state.formData.result}  onChange = {this.handleChange} name = "result" />
                  </Form.Field>
                  <Form.Field>
                    <label>Setup Type</label>
                    <input placeholder='Goodman' value = {this.state.formData.setupType}  onChange = {this.handleChange} name = "setupType" />
                 </Form.Field>
+                 <Form.Field>
+                   <label>PnL</label>
+                   <input placeholder='12.00' value = {this.state.formData.PnL}  onChange = {this.handleChange} name = "PnL" />
+                </Form.Field>
                 <Form.Field>
                     <label>Side</label>
                     <input placeholder='Buy' name = "side" value = {this.state.formData.side}  onChange = {this.handleChange} />
+                </Form.Field>
+                 <Form.Field>
+                    <label>Open DateTime</label>
+                    <input placeholder='12-25-206:9:54am' name = "openDate" value = {this.state.formData.openDate}  onChange = {this.handleChange} />
+                </Form.Field>
+                 <Form.Field>
+                    <label>Close DatTime</label>
+                    <input placeholder='12-25-206:9:54am' name = "closenDate" value = {this.state.formData.closeDate}  onChange = {this.handleChange} />
                 </Form.Field>
                  <Form.Field>
                 <TextArea label='Description' name = "description" placeholder='.'
@@ -86,7 +98,7 @@ class TradeTrackerForm extends Component {
     }
 }
 
-export default TradeTrackerForm;
+export default TradeCloseForm;
 
 
 //   <Dropzone >

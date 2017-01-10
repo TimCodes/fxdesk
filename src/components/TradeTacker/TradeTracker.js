@@ -91,21 +91,22 @@ import TradeTrackerForm    from './TradeTrackerForm'
        
      
 
-        render(){ return (
-        <div className = "ui container" >
-            <Header as='h1' color = "pink" textAlign = 'center'>
-                Trade Tracker  
-              <Icon className= "right-algn" name='plus' onClick = {this.newTrade}></Icon>
-            </Header>
-           <TradeTrackerList trades = {this.state.data} editTrade = {this.editTrade}   />
-           <TradeTrackerForm 
-            showModal = {this.state.showModal} 
-            hideModal = {this.hideModalVis} 
-            passData  = {this.handleSave} 
-            trade     = {this.state.trade}
-            action    = {this.state.tradeAction}
-           />
-        </div> 
+        render(){
+             return (
+                <div className = "ui container" >
+                    <Header as='h1' color = "pink" textAlign = 'center'>
+                        Trade Tracker  
+                    <Icon className= "right-algn" name='plus' onClick = {this.newTrade}></Icon>
+                    </Header>
+                <TradeTrackerList trades = {this.state.data} editTrade = {this.editTrade}   />
+                <TradeTrackerForm 
+                    showModal = {this.state.showModal} 
+                    hideModal = {this.hideModalVis} 
+                    passData  = {this.handleSave} 
+                    trade     = {this.state.trade}
+                    action    = {this.state.tradeAction}
+                />
+                </div> 
         )    
         }
     }

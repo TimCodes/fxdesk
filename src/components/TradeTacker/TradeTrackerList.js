@@ -14,6 +14,7 @@ class TradeTrackerList extends Component {
                 let editClick   = this.props.editTrade.bind(this, t, idx);
                 let viewClick   = this.props.viewTrade.bind(this, t, idx);
                 let deleteClick = this.props.deleteTrade.bind(this, t, idx);
+                let closeClick  = this.props.closeTrade.bind(this, t, idx);
                 return (   
                 <Grid.Column  computer={8} mobile = {16}>      
                 <Card color='green' key = {idx}  fluid className = "blue-bg"> 
@@ -22,7 +23,7 @@ class TradeTrackerList extends Component {
                             <Dropdown.Menu>
                                 <Dropdown.Item text='View' description = 'view details' onClick = {viewClick} />
                                 <Dropdown.Item text='Edit' description='edit details' onClick = {editClick} />
-                                <Dropdown.Item text='Close' description='close to history' />
+                                <Dropdown.Item text='Close' description='close to history'onClick = {closeClick} />
                                 <Dropdown.Item text='Delete' description='delete for good' onClick = {deleteClick} />
                             </Dropdown.Menu>
                         </Dropdown>

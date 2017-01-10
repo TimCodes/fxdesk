@@ -14,7 +14,9 @@ import TradeTrackerDetails from './TradeTrackerDetails';
     <i className="ellipsis vertical icon right floated"></i>
     )
 
-
+    // TODO : refactor fucntion naems foor 
+    // actions that just change view
+    // eg. close should be closeViewShow
     class TradeTracker extends Component {
 
         constructor(){
@@ -26,21 +28,24 @@ import TradeTrackerDetails from './TradeTrackerDetails';
                 visible: true,
                 showFormModal : false,
                 showDetailsModal : false,
+                showCloseFormModal: false, 
                 trade : {},
                 tradeIdx: null,
                 tradeAction: null
             };
 
-            this.showModalVis     = this.showModalVis.bind(this);
-            this.hideModalVis     = this.hideModalVis.bind(this);
-            this.hideDetailModal  = this.hideDetailModal.bind(this);
-            this.addTrade         = this.addTrade.bind(this);
-            this.editTrade        = this.editTrade.bind(this);
-            this.newTrade         = this.newTrade.bind(this);
-            this.handleSave       = this.handleSave.bind(this)
-            this.updateTrade      = this.updateTrade.bind(this)
-            this.viewTrade        = this.viewTrade.bind(this);
-            this.deleteTrade      = this.deleteTrade.bind(this);
+            this.showModalVis       = this.showModalVis.bind(this);
+            this.hideModalVis       = this.hideModalVis.bind(this);
+            this.hideDetailModal    = this.hideDetailModal.bind(this);
+            this.hideCloseFormModal = this.hideCloseFormModal.bind(this);
+            this.addTrade           = this.addTrade.bind(this);
+            this.editTrade          = this.editTrade.bind(this);
+            this.newTrade           = this.newTrade.bind(this);
+            this.handleSave         = this.handleSave.bind(this)
+            this.updateTrade        = this.updateTrade.bind(this)
+            this.viewTrade          = this.viewTrade.bind(this);
+            this.closeTrade         = this.closeTrade.bind(this);
+            this.deleteTrade        = this.deleteTrade.bind(this);
         }
         
         newTrade(){
@@ -69,6 +74,12 @@ import TradeTrackerDetails from './TradeTrackerDetails';
             })
         }
 
+        hideCloseFormModal(){
+            this.setState({
+                showCloseFormModal: false
+            })
+        }
+
         addTrade(trade){
             this.dataService.create(trade);
             this.updateTradeList();
@@ -91,6 +102,10 @@ import TradeTrackerDetails from './TradeTrackerDetails';
                 this.addTrade(trade)   
             }else if(this.state.tradeAction === "EDIT"){
                 this.updateTrade(trade,this.state.tradeIdx)
+            }else if(this.state.tradeAction === "CLOSE"){
+              // this should clsoe trade 
+              // remvoe from tracker trade list
+              // add to trade history trade list 
             }
 
             this.hideModalVis();
@@ -105,11 +120,20 @@ import TradeTrackerDetails from './TradeTrackerDetails';
         }
        
         viewTrade(viewTrade){
-           
-            this.setState({
+          this.setState({
                 showDetailsModal: true,
                 trade : viewTrade
             })
+        }
+
+        closeTrade(cTrade){
+            this.setState(
+                {
+                    showCloseFormModal: true,
+                    trade: cTrade,
+                    tradeAction: 'CLOSE'
+                }
+            )
         }
 
         deleteTrade(trade, tradeIdx){
@@ -130,6 +154,7 @@ import TradeTrackerDetails from './TradeTrackerDetails';
                     editTrade   = {this.editTrade}  
                     viewTrade   = {this.viewTrade}
                     deleteTrade = {this.deleteTrade}
+                    closeTrade  = {this.closeTrade}
                 />
                 <TradeTrackerForm 
                     showModal = {this.state.showFormModal} 
@@ -137,6 +162,12 @@ import TradeTrackerDetails from './TradeTrackerDetails';
                     passData  = {this.handleSave} 
                     trade     = {this.state.trade}
                     action    = {this.state.tradeAction}
+                />
+                <TradeCloseForm 
+                    showModal = {this.state.showCloseFormModal} 
+                    hideModal = {this.hideCloseFormModal} 
+                    passData  = {this.handleSave} 
+                    trade     = {this.state.trade}
                 />
                 <TradeTrackerDetails
                     showModal  = {this.state.showDetailsModal}

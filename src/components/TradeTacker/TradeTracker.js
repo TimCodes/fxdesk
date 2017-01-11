@@ -144,36 +144,38 @@ import TradeTrackerDetails from './TradeTrackerDetails';
 
         render(){ 
             return (
-            <div className = "ui container" >
-                <Header as='h1' color = "pink" textAlign = 'center'>
+            <div className = "ui container chartWrapper" >
+                <Header as='h1'  textAlign = 'center' attached = 'top' className = "section-header">
                     Trade Tracker  
                 <Icon className= "right-algn" name='plus' onClick = {this.newTrade}></Icon>
                 </Header>
-                <TradeTrackerList 
-                    trades      = {this.state.data} 
-                    editTrade   = {this.editTrade}  
-                    viewTrade   = {this.viewTrade}
-                    deleteTrade = {this.deleteTrade}
-                    closeTrade  = {this.closeTrade}
-                />
-                <TradeTrackerForm 
-                    showModal = {this.state.showFormModal} 
-                    hideModal = {this.hideModalVis} 
-                    passData  = {this.handleSave} 
-                    trade     = {this.state.trade}
-                    action    = {this.state.tradeAction}
-                />
-                <TradeCloseForm 
-                    showModal = {this.state.showCloseFormModal} 
-                    hideModal = {this.hideCloseFormModal} 
-                    passData  = {this.handleSave} 
-                    trade     = {this.state.trade}
-                />
-                <TradeTrackerDetails
-                    showModal  = {this.state.showDetailsModal}
-                    trade      = {this.state.trade}
-                    hideModal  = {this.hideDetailModal}
-                />
+              
+                    <TradeTrackerList 
+                        trades      = {this.state.data} 
+                        editTrade   = {this.editTrade}  
+                        viewTrade   = {this.viewTrade}
+                        deleteTrade = {this.deleteTrade}
+                        closeTrade  = {this.closeTrade}
+                    />  
+                    <TradeTrackerForm 
+                        showModal = {this.state.showFormModal} 
+                        hideModal = {this.hideModalVis} 
+                        passData  = {this.handleSave} 
+                        trade     = {this.state.trade}
+                        action    = {this.state.tradeAction}
+                    />
+                    <TradeCloseForm 
+                        showModal = {this.state.showCloseFormModal} 
+                        hideModal = {this.hideCloseFormModal} 
+                        passData  = {this.handleSave} 
+                        trade     = {this.state.trade}
+                    />
+                    <TradeTrackerDetails
+                        showModal  = {this.state.showDetailsModal}
+                        trade      = {this.state.trade}
+                        hideModal  = {this.hideDetailModal}
+                    />
+                   
             </div> 
         )    
         }

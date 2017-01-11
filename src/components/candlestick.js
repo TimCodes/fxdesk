@@ -21,6 +21,7 @@ class CandleStickChart extends React.Component {
 	render() {
 		var { type, width, data, ratio } = this.props;
 		return (
+			<div className="chartWrapper">
 			<ChartCanvas ratio={ratio} width={width} height={400}
 					margin={{ left: 50, right: 50, top: 10, bottom: 30 }} type={type}
 					seriesName="MSFT"
@@ -31,9 +32,13 @@ class CandleStickChart extends React.Component {
 				<Chart id={1} yExtents={d => [d.high, d.low]}>
 					<XAxis axisAt="bottom" orient="bottom" ticks={6}/>
 					<YAxis axisAt="left" orient="left" ticks={5} />
-					<CandlestickSeries />
+					<CandlestickSeries
+						  fill = {d => d.close > d.open ? "#64b734" : "#d55a49"}
+					 	  opacity = {1}
+					 />
 				</Chart>
 			</ChartCanvas>
+			</div>
 		);
 	}
 }

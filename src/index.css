@@ -4,8 +4,30 @@ body {
   font-family: sans-serif;
   height: 100%;
   width: 100%;
-  background: #303030;
+  background: #212121;
 }
+
+.chartWrapper{
+  background: #303030 !important;
+  color: white !important;
+  padding: 15px !important;
+}
+
+.trackingList{
+  background: #265784 !important;
+}
+
+.section-header{
+  background: #4059ce !important;
+  border: none !important;
+  margin-bottom: 15px !important;
+  
+}
+
+.section-background{
+  background: #424242 !important;
+}
+
 
 .full {
   height: 100%;

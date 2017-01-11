@@ -37,6 +37,12 @@ class TradeEquityChart extends Component {
             }).catch(e => console.log(e))
     }
 
+    hello(d){
+        console.log(arguments)
+        console.log('hello')
+        console.log(d)
+    }
+
     render(){
          let { data, type, width, ratio } = this.props;
          if(this.state.data.length < 1 ){
@@ -78,6 +84,7 @@ class TradeEquityChart extends Component {
                                 strokeDasharray="Dot" />
                             <ScatterSeries
                                 yAccessor={d => d.AAPLClose}
+                                onClick = {this.hello}
                                 marker={SquareMarker}
                                 markerProps={{ width: 6, stroke: "#ff7f0e", fill: "#ff7f0e" }} />
                             <LineSeries
@@ -85,6 +92,7 @@ class TradeEquityChart extends Component {
                                 stroke="#2ca02c" />
                             <ScatterSeries
                                 yAccessor={d => d.GEClose}
+                                onClick = {this.hello}
                                 marker={TriangleMarker}
                                 markerProps={{ width: 8, stroke: "#2ca02c", fill: "#2ca02c" }} />
                             <LineSeries
@@ -92,6 +100,7 @@ class TradeEquityChart extends Component {
                                 strokeDasharray="LongDash" />
                             <ScatterSeries
                                 yAccessor={d => d.close}
+                                onClick = {this.hello}
                                 marker={CircleMarker}
                                 markerProps={{ r: 3 }} />
                             <OHLCTooltip forChart={1} origin={[-40, 0]}/>

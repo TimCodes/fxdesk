@@ -17,7 +17,7 @@ class TradeTrackerList extends Component {
                 let closeClick  = this.props.closeTrade.bind(this, t, idx);
                 return (   
                 <Grid.Column  computer={8} mobile = {16}>      
-                <Card color='green' key = {idx}  fluid className = "blue-bg"> 
+                <Card color='green' key = {idx}  fluid className = "section-background"> 
                     <Card.Content >
                         <Dropdown  inline trigger={trigger} icon  className ='right floated' pointing = 'left top'>
                             <Dropdown.Menu>
@@ -34,7 +34,7 @@ class TradeTrackerList extends Component {
                         {t.side}
                         </Card.Meta>
                         <Card.Description>
-                        <Segment color = 'blue' inverted textAlign= 'center' 	>
+                        <Segment  inverted textAlign= 'center' className = 'trackingList'	>
                            {t.status}
                         </Segment>
                         </Card.Description>

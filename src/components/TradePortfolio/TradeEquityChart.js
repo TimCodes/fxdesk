@@ -30,19 +30,15 @@ class TradeEquityChart extends Component {
     componentWillMount(){
         return  this.dataService.getEquityTestdata()
             .then(chartData => {
-                console.log(this.data)
+                console.log(chartData)
                 this.setState({
-                    data : chartData
-            })
+                    data :this.dataService.formatEquityArr()
+                 })
+                this.dataService.generateEquityArr()
+                console.log(this.dataService.formatEquityArr())
+  
             }).catch(e => console.log(e))
     }
-
-    hello(d){
-        console.log(arguments)
-        console.log('hello')
-        console.log(d)
-    }
-
     render(){
          let { data, type, width, ratio } = this.props;
          if(this.state.data.length < 1 ){
@@ -58,9 +54,9 @@ class TradeEquityChart extends Component {
                             seriesName="MSFT"
                             data={this.state.data}
                             xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
-                            xExtents={[new Date(2012, 0, 1), new Date(2012, 2, 2)]}>
+                            xExtents={[new Date(2006, 0, 1), new Date(2006, 12, 2)]}>
                         <Chart id={1}
-                                yExtents={d => [d.high, d.low, d.AAPLClose, d.GEClose]}>
+                                yExtents={d => [4000, 15000]}>
                             <XAxis axisAt="bottom" orient="bottom"/>
                             <YAxis
                                 axisAt="right"
@@ -75,7 +71,7 @@ class TradeEquityChart extends Component {
                                 displayFormat={timeFormat("%Y-%m-%d")} />
                             <MouseCoordinateY
                                 at="right"
-                                orient="right"
+
                                 displayFormat={format(".2f")} />
 
                             <LineSeries
@@ -94,16 +90,13 @@ class TradeEquityChart extends Component {
                                 yAccessor={d => d.GEClose}
                                 onClick = {this.hello}
                                 marker={TriangleMarker}
-                                markerProps={{ width: 8, stroke: "#2ca02c", fill: "#2ca02c" }} />
-                            <LineSeries
-                                yAccessor={d => d.close}
-                                strokeDasharray="LongDash" />
-                            <ScatterSeries
-                                yAccessor={d => d.close}
-                                onClick = {this.hello}
-                                marker={CircleMarker}
-                                markerProps={{ r: 3 }} />
-                            <OHLCTooltip forChart={1} origin={[-40, 0]}/>
+
+                                displayFormat={format(".2f")}     
+                                  
+                            />
+                           
+
+                           
                         </Chart>
                         <CrossHairCursor />
                 </ChartCanvas>

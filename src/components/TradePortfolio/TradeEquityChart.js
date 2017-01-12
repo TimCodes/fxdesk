@@ -73,21 +73,11 @@ class TradeEquityChart extends Component {
                                 at="right"
 
                                 displayFormat={format(".2f")} />
-
                             <LineSeries
-                                yAccessor={d => d.AAPLClose}
-                                stroke="#ff7f0e"
-                                strokeDasharray="Dot" />
-                            <ScatterSeries
-                                yAccessor={d => d.AAPLClose}
-                                onClick = {this.hello}
-                                marker={SquareMarker}
-                                markerProps={{ width: 6, stroke: "#ff7f0e", fill: "#ff7f0e" }} />
-                            <LineSeries
-                                yAccessor={d => d.GEClose}
+                                yAccessor={d => d.equity}
                                 stroke="#2ca02c" />
                             <ScatterSeries
-                                yAccessor={d => d.GEClose}
+                                yAccessor={d => d.equity}
                                 onClick = {this.hello}
                                 marker={TriangleMarker}
 

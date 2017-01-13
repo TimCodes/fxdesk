@@ -6,7 +6,6 @@
     "react-scripts": "0.8.4"
   },
   "dependencies": {
-
     "axios": "^0.15.3",
     "d3": "^4.4.1",
     "d3-dsv": "^1.0.3",

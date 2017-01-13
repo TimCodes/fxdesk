@@ -11,6 +11,9 @@ body {
   background: #303030 !important;
   color: white !important;
   padding: 15px !important;
+  height: 100%;
+  width: 100%;
+  padding: 170px;
 }
 
 .trackingList{
@@ -26,6 +29,8 @@ body {
 
 .section-background{
   background: #424242 !important;
+  color:white !important;
+  border: none;
 }
 
 

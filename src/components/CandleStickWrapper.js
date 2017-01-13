@@ -13,7 +13,9 @@ class CandleStickWrapper extends React.Component {
         this.dataService = new TradeDataService();
     }
     componentWillMount(){
-        return  this.dataService.getTestData()
+        this.dataService.getDefaultHourBars('EUR_USD')
+        .then(console.log)
+        return  this.dataService.getDefault15MinBars('EUR_USD')
             .then(chartData => {
                 console.log(this.data)
                 this.setState({

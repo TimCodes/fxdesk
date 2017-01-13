@@ -17,27 +17,22 @@ class TradeTrackerList extends Component {
                 let closeClick  = this.props.closeTrade.bind(this, t, idx);
                 return (   
                 <Grid.Column  computer={8} mobile = {16}>      
-                <Card color='green' key = {idx}  fluid className = "section-background"> 
+                <Card color='black' key = {idx}  fluid className = "section-background"> 
                     <Card.Content >
-                        <Dropdown  inline trigger={trigger} icon  className ='right floated' pointing = 'left top'>
-                            <Dropdown.Menu>
+                        <Dropdown  inline trigger={trigger} icon  className ='right floated section-background' pointing = 'left top'>
+                            <Dropdown.Menu className = "section-background">
                                 <Dropdown.Item text='View' description = 'view details' onClick = {viewClick} />
                                 <Dropdown.Item text='Edit' description='edit details' onClick = {editClick} />
                                 <Dropdown.Item text='Close' description='close to history'onClick = {closeClick} />
                                 <Dropdown.Item text='Delete' description='delete for good' onClick = {deleteClick} />
                             </Dropdown.Menu>
                         </Dropdown>
-                        <Card.Header>
+                        <Card.Header className = "section-background">
                         {t.pair}
                         </Card.Header>
-                        <Card.Meta>
+                        <Card.Meta className = "section-background">
                         {t.side}
                         </Card.Meta>
-                        <Card.Description>
-                        <Segment  inverted textAlign= 'center' className = 'trackingList'	>
-                           {t.status}
-                        </Segment>
-                        </Card.Description>
                     </Card.Content>
                     </Card> 
                     </Grid.Column>      
@@ -54,3 +49,13 @@ class TradeTrackerList extends Component {
     export default TradeTrackerList;
 
 
+/*
+
+
+       <Card.Description>
+            <Segment  inverted textAlign= 'center' className = 'trackingList'	>
+                 {t.status}
+            </Segment>         
+        </Card.Description>                     
+
+*/

@@ -42,20 +42,20 @@
 
         render(){ 
             return (
-                   <Grid>
-                        <TradeEquityChart />
+                   <div className = "ui container">
+                        <div className = "chartWrapper" >
+                            <TradeEquityChart />
+                        </div>
+                        
                         <TradePortfolioStats 
                             winCount  = {this.state.winCount}
                             lossCount = {this.state.lossCount} 
                             PnL       = {this.state.PnL}
                             maxDD     = {this.state.maxDD}
                         />
-                        <Grid.Row>
-                            <Grid.Column width={16} inverted>
-                                <TradePortfolioTradesTable  trades = {this.state.trades} />
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
+                     
+                       <TradePortfolioTradesTable  trades = {this.state.trades} />
+                 </div> 
             )    
         }
     }

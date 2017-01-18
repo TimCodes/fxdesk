@@ -51,18 +51,23 @@ class TradeEquityChart extends Component {
                             margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
                             type={type}
                             pointsPerPxThreshold={1}
-                            seriesName="MSFT"
+                            
                             data={this.state.data}
                             xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
                             xExtents={[new Date(2006, 0, 1), new Date(2006, 12, 2)]}>
                         <Chart id={1}
                                 yExtents={d => [4000, 15000]}>
-                            <XAxis axisAt="bottom" orient="bottom"/>
+                            <XAxis axisAt="bottom" orient="bottom"
+                                stroke= "white"
+                                 tickStroke = "white"
+                            />
                             <YAxis
                                 axisAt="right"
                                 orient="right"
                                 // tickInterval={5}
                                 // tickValues={[40, 60]}
+                                stroke= "white"
+                                tickStroke = "white"
                                 ticks={5}
                             />
                             <MouseCoordinateX
@@ -75,7 +80,7 @@ class TradeEquityChart extends Component {
                                 displayFormat={format(".2f")} />
                             <LineSeries
                                 yAccessor={d => d.equity}
-                                stroke="#2ca02c" />
+                                stroke="#4059ce" />
                             <ScatterSeries
                                 yAccessor={d => d.equity}
                                 onClick = {this.hello}

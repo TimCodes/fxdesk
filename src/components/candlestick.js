@@ -7,7 +7,7 @@ import { scaleTime } from "d3-scale";
 import { tsvParse } from  "d3-dsv";
 import { timeParse } from "d3-time-format";
 import { ChartCanvas, Chart, series, scale, coordinates, tooltip, axes, indicator, helper } from "react-stockcharts";
-import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container, Modal } from 'semantic-ui-react'
+import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container, Modal, Dropdown, Input, Search } from 'semantic-ui-react'
 
 var { CandlestickSeries } = series;
 var { XAxis, YAxis } = axes;
@@ -19,17 +19,63 @@ let { CrossHairCursor, MouseCoordinateX, MouseCoordinateY } = coordinates;
 
 let { OHLCTooltip } = tooltip;
 
+let pairOptions = [
+						{value: 'EUR_USD', text: "EURUSD" } ,
+						{value: "GBP_USD", text: "GBPUSD" },
+						{value: "EUR_JPY",  text :"EURJPY"}
+				]
+
 class CandleStickChart extends React.Component {
 
+	state = { activeItem: '15m' }
+	 handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 	// maybe conditionally render this dependining 
 	// if data is there or not
 	render() {
+		 const { activeItem } = this.state
 		var { type, width, data, ratio } = this.props;
+
 		return (
 			<div className="chartWrapper">
+		 <Menu inverted compact >
+			
+			<Menu.Item
+				name='upcomingEvents'
+				
+				content='Upcoming Events'
+				onClick={this.handleItemClick}
+			>
+			<Dropdown placeholder='EURUSD' fluid selection options={pairOptions} className = "section-background"/>
+			</Menu.Item>
+			<Menu.Item 
+				name='editorials'
+				
+				content='Editorials'
+				onClick={this.handleItemClick}
+			>
+
+				<Image src='/images/candlestick.png' size='mini'  bordered/>
+				<Image src='/images/bars.png' size='mini' bordered />
+				</Menu.Item>	
+			<Menu.Item
+			name='reviews'
+				
+				content={ 
+					<Menu tabular compact size = "tiny" >
+						<Menu.Item name='15m' active={activeItem === '15m'} onClick={this.handleItemClick} />
+						<Menu.Item name='1h' active={activeItem === '1h'} onClick={this.handleItemClick} />
+						<Menu.Item name='4h' active={activeItem === '4h'} onClick={this.handleItemClick} />
+					</Menu>
+				}
+			
+				>
+
+				</Menu.Item>
+
+            </Menu>
 			<ChartCanvas ratio={ratio} width={width} height={700} 
 					margin={{ left: 50, right: 50, top: 10, bottom: 30 }} type={type}
-					seriesName="MSFT"
+				
 					data={data}
 					xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
 					xExtents={[new Date(2016, 0, 1), new Date(2017, 6, 1)]}
@@ -41,9 +87,13 @@ class CandleStickChart extends React.Component {
                             <YAxis
                                 axisAt="right"
                                 orient="right"
-                                // tickInterval={5}
-                                // tickValues={[40, 60]}
+                                stroke= "white"
+                                tickStroke = "white"
                                 ticks={5}
+                            />
+							 <XAxis axisAt="bottom" orient="bottom"
+                                stroke= "white"
+                                 tickStroke = "white"
                             />
                             <MouseCoordinateX
                                 at="bottom"
@@ -62,7 +112,7 @@ class CandleStickChart extends React.Component {
 				</Chart>
 				 <CrossHairCursor />
 			</ChartCanvas>
-			 <Modal size={'fullscreen'} open={true} onClose={this.close} inverted className="chartWrapper">
+			 <Modal size={'fullscreen'} open={false} onClose={this.close} inverted className="chartWrapper">
 				
 				
 					<ChartCanvas ratio={ratio} width={1500} height={800} 

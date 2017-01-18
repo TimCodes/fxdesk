@@ -147,7 +147,7 @@ class TradeTracker extends Component {
 
         render(){ 
             return (
-            <div className = "ui container chartWrapper" >
+            <Grid.Column width	= {16} >
                 <Header as='h1'  textAlign = 'center' attached = 'top' className = "section-header">
                     Trade Tracker  
                 <Icon className= "right-algn" name='plus' onClick = {this.newTrade}></Icon>
@@ -179,7 +179,7 @@ class TradeTracker extends Component {
                     hideModal  = {this.hideDetailModal}
                 />
 
-            </div> 
+            </Grid.Column> 
 
         )    
         }

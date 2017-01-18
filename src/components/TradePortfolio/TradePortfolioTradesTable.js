@@ -7,7 +7,7 @@ class TradePortfolioTradesTable extends Component {
     render(){ 
         return (
    
-                    <Table celled inverted selectable>
+                    <Table  inverted selectable unstackable size = "small">
                         <Table.Header>
                             <Table.Row>
                             <Table.HeaderCell>Pair</Table.HeaderCell>

@@ -25,10 +25,14 @@ class Main extends Component {
       
     };
   }
-  toggleVisibility = () => this.setState({ visible: !this.state.visible })
+  toggleVisibility = () =>  {
+    this.setState({ visible: !this.state.visible })
+  }  
   dimVisibility = (e) => {
     console.log(e)
-    //this.setState({ visible:false })
+    if(this.state.visible){
+      this.setState({ visible:false })
+    }  
   }
 
   render() {

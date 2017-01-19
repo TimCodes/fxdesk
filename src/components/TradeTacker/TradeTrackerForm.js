@@ -53,8 +53,8 @@ class TradeTrackerForm extends Component {
   render() { 
     return (  
             <Modal open = {this.props.showModal}>
-                <Modal.Header>Track New Trade <span className ='close-btn' onClick ={this.props.hideModal}> X </span></Modal.Header>
-                <Modal.Content >
+                <Modal.Header className = "section-header">Track New Trade <span className ='close-btn' onClick ={this.props.hideModal}> X </span></Modal.Header>
+                <Modal.Content  className = "form">
                 <Form onSubmit = {this.handleSubmit} >
                  <Form.Field>
                    <label>Pair</label>

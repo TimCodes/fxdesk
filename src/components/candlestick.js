@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Measure from 'react-measure'
 import { Router } from 'react-router';
 import { timeFormat } from "d3-time-format";
 import {format} from 'd3'
@@ -9,7 +10,7 @@ import { timeParse } from "d3-time-format";
 import { ChartCanvas, Chart, series, scale, coordinates, tooltip, axes, indicator, helper } from "react-stockcharts";
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container, Modal, Dropdown, Input, Search } from 'semantic-ui-react'
 
-var { CandlestickSeries } = series;
+var { CandlestickSeries, OHLCSeries } = series;
 var { XAxis, YAxis } = axes;
 var { fitWidth } = helper;
 var { discontinuousTimeScaleProvider } = scale;
@@ -27,7 +28,9 @@ let pairOptions = [
 
 class CandleStickChart extends React.Component {
 
-	state = { activeItem: '15m' }
+	state = { activeItem: '15m',
+		   	  containerDimensions: {}
+		    }
 	 handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 	// maybe conditionally render this dependining 
 	// if data is there or not
@@ -35,8 +38,17 @@ class CandleStickChart extends React.Component {
 		 const { activeItem } = this.state
 		var { type, width, data, ratio } = this.props;
 
-		return (
-			<div className="chartWrapper">
+		return ( <Measure
+        onMeasure={(dimensions) => {
+		 console.log(dimensions)	
+		 setTimeout(function () {
+			 console.log(this.state)
+		 }.bind(this), 300)
+          return this.setState({ containerDimensions : dimensions}, console.log(this.state))
+		
+        }}
+      >
+	   <div className="chartWrapper">
 		 <Menu inverted compact >
 			
 			<Menu.Item
@@ -47,16 +59,15 @@ class CandleStickChart extends React.Component {
 			>
 			<Dropdown placeholder='EURUSD' fluid selection options={pairOptions} className = "section-background"/>
 			</Menu.Item>
-			<Menu.Item 
-				name='editorials'
-				
-				content='Editorials'
-				onClick={this.handleItemClick}
-			>
-
+		
+          
+				<Menu.Item  >
 				<Image src='/images/candlestick.png' size='mini'  bordered/>
+				</Menu.Item>
+				<Menu.Item  >
 				<Image src='/images/bars.png' size='mini' bordered />
-				</Menu.Item>	
+					</Menu.Item>
+	
 			<Menu.Item
 			name='reviews'
 				
@@ -73,9 +84,12 @@ class CandleStickChart extends React.Component {
 				</Menu.Item>
 
             </Menu>
-			<ChartCanvas ratio={ratio} width={width} height={700} 
-					margin={{ left: 50, right: 50, top: 10, bottom: 30 }} type={type}
-				
+			<ChartCanvas 
+					ratio={ratio} 
+					width={this.state.containerDimensions.width} 
+					height={this.state.containerDimensions.height - 60} 
+					margin={{ left: 50, right: 100, top: 10, bottom: 30 }} type={type}
+					
 					data={data}
 					xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
 					xExtents={[new Date(2016, 0, 1), new Date(2017, 6, 1)]}
@@ -97,18 +111,22 @@ class CandleStickChart extends React.Component {
                             />
                             <MouseCoordinateX
                                 at="bottom"
-                                orient="bottom"
-                                displayFormat={timeFormat("%Y-%m-%d")} />
+                                orient="left"
+								rectWidth = {125}
+                                displayFormat={timeFormat("%y-%m-%dT%H:%M:%S")} />
                             <MouseCoordinateY
                                 at="right"
-								hideLine = {false}	
 								
                                 displayFormat={format(".4")} />
 					<CandlestickSeries
 						  fill = {d => d.close > d.open ? "#64b734" : "#d55a49"}
 					 	  opacity = {1}
 					 />
-					 
+
+				 <OHLCSeries
+						  stroke = {d => d.close > d.open ? "#64b734" : "#d55a49"}
+					 	  opacity = {1}
+					 />
 				</Chart>
 				 <CrossHairCursor />
 			</ChartCanvas>
@@ -140,6 +158,7 @@ class CandleStickChart extends React.Component {
 				
 			  </Modal>
 			</div>
+		 </Measure>	
 		);
 	}
 }

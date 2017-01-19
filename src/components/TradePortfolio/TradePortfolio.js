@@ -5,7 +5,7 @@
     import TradePortfolioStats       from './TradePortfolioStats';
     import TradePortfolioTradesTable from './TradePortfolioTradesTable';
     
-    import TradeHistoryService from '../../utils/TradeHistoryService';
+   import {getServiceContainer} from '../../utils/ServicesContainer';
 
 
     class TradePortfolio extends Component {
@@ -22,7 +22,7 @@
                 maxDD      : null
             };
 
-            this.dataService = new TradeHistoryService();
+            this.dataService = getServiceContainer().history;
         }
 
         componentWillMount(){

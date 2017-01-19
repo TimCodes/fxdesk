@@ -4,12 +4,18 @@ body {
 }
 
 .chartWrapper{
-  background: #303030 !important;
+  background: #414141 !important;
+  position: relative;
   color: white !important;
-  padding: 15px !important;
-  height: 100%;
-  width: 100%;
-  padding: 170px;
+  padding: 5px !important;
+  margin: 1px !important;
+  margin-top: 15px !important;  
+  left: 1%;
+  height: 90%;
+  max-height: 1000px;
+  min-height: 800px;
+  width:98%;
+ 
 }
 
 .trackingList{
@@ -17,11 +23,12 @@ body {
 }
 
 .section-header{
-  background: #4059ce !important;
+  background: #2496ee !important;
   border: none !important;
-  margin-bottom: 15px !important;
+  color: #EEEEEE !important;
   
 }
+
 
 .section-background{
   background: #424242 !important;
@@ -29,6 +36,31 @@ body {
   border: none;
 }
 
+.form{
+  background: #212121 !important;
+  color: white !important;
+}
+input{
+  background: #424242 !important;
+}
+textarea{
+  background: #424242 !important;
+  color: #E0E0E0 !important;;
+}
+
+.form>button{
+  background: #64b734 !important;
+}
+.btn{
+  background: #d55a49 !important;
+}
+.field>label{
+  color: #E0E0E0 !important;;
+}
+
+.field>input{
+  color: #E0E0E0 !important;;
+}
 
 .full {
   height: 100%;
@@ -61,8 +93,9 @@ body {
 
 .right-algn{
   position: absolute;
-  right:30px;
-  top:30px;
+  right: 10px;
+  top: 57px;
+  display: inline;
 }
 
 .close-btn{

@@ -53,39 +53,41 @@ class TradeCloseForm extends Component {
   render() { 
     return (  
             <Modal open = {this.props.showModal}>
-                <Modal.Header>Track New Trade <span className ='close-btn' onClick ={this.props.hideModal}> X </span></Modal.Header>
-                <Modal.Content >
-                <Form onSubmit = {this.handleSubmit} >
+                <Modal.Header className = "section-header">Close Trade 
+                    <span className ='close-btn' onClick ={this.props.hideModal}> X </span>
+                </Modal.Header>
+                <Modal.Content  className = "form">
+                <Form onSubmit = {this.handleSubmit}  className = "form">
                  <Form.Field>
                    <label>Pair</label>
-                    <input   placeholder='EURUSD' value = {this.state.formData.pair}  onChange = {this.handleChange} name = "pair"/>
+                    <input    value = {this.state.formData.pair}  onChange = {this.handleChange} name = "pair"/>
                  </Form.Field>
                  <Form.Field>
                    <label>Status</label>
-                   <input placeholder='WIN' value = {this.state.formData.result}  onChange = {this.handleChange} name = "result" />
+                   <input  value = {this.state.formData.result}  onChange = {this.handleChange} name = "result" />
                  </Form.Field>
                  <Form.Field>
                    <label>Setup Type</label>
-                   <input placeholder='Goodman' value = {this.state.formData.setupType}  onChange = {this.handleChange} name = "setupType" />
+                   <input value = {this.state.formData.setupType}  onChange = {this.handleChange} name = "setupType" />
                 </Form.Field>
                  <Form.Field>
                    <label>PnL</label>
-                   <input placeholder='12.00' value = {this.state.formData.PnL}  onChange = {this.handleChange} name = "PnL" />
+                   <input  value = {this.state.formData.PnL}  onChange = {this.handleChange} name = "PnL" />
                 </Form.Field>
                 <Form.Field>
                     <label>Side</label>
-                    <input placeholder='Buy' name = "side" value = {this.state.formData.side}  onChange = {this.handleChange} />
+                    <input name = "side" value = {this.state.formData.side}  onChange = {this.handleChange} />
                 </Form.Field>
                  <Form.Field>
                     <label>Open DateTime</label>
-                    <input placeholder='12-25-206:9:54am' name = "openDate" value = {this.state.formData.openDate}  onChange = {this.handleChange} />
+                    <input  name = "openDate" value = {this.state.formData.openDate}  onChange = {this.handleChange} />
                 </Form.Field>
                  <Form.Field>
                     <label>Close DatTime</label>
-                    <input placeholder='12-25-206:9:54am' name = "closenDate" value = {this.state.formData.closeDate}  onChange = {this.handleChange} />
+                    <input  name = "closenDate" value = {this.state.formData.closeDate}  onChange = {this.handleChange} />
                 </Form.Field>
                  <Form.Field>
-                <TextArea label='Description' name = "description" placeholder='.'
+                <TextArea label='Description' name = "description" 
                    value = {this.state.formData.description}  
                    onChange = {this.handleTextAreaChange}
                  />

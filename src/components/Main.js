@@ -5,16 +5,20 @@ import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container, Grid } 
 
 import ChartSidebar  from './ChartSidebar';
 
+
+import {init} from '../utils/ServicesContainer';
+import TradeHistoryService from '../utils/TradeHistoryService';
+
 import logo from '../logo.svg';
 import '../App.css';
 
 
 
 class Main extends Component {
- 
+
   constructor(props) {
     super(props);
-
+     init();
     this.state = {
       data:  [],
       visible: false
@@ -37,9 +41,9 @@ class Main extends Component {
               <i className="content icon"></i>
             </div>
           </div>
-          <div className="ui container">
-         {this.props.children}
-        </div>
+          <div className="ui container fluid">
+            {this.props.children}
+          </div>
         </div>     
     )
   }

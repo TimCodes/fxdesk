@@ -9,7 +9,7 @@ const trigger = (
 
 class TradeTrackerList extends Component {
         render(){ return (
-            <Grid>
+            <Grid.Row>
             {this.props.trades.map( (t, idx) => {
                 let editClick   = this.props.editTrade.bind(this, t, idx);
                 let viewClick   = this.props.viewTrade.bind(this, t, idx);
@@ -38,7 +38,7 @@ class TradeTrackerList extends Component {
                     </Grid.Column>      
                     )
                 })}
-            </Grid>
+            </Grid.Row>
             
           
       

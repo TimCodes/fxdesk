@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Button, Card, Image, Segment, Flag, Dropdown, Grid, Header, Icon, Modal, Form, Checkbox } from 'semantic-ui-react'
 import Dropzone from 'react-dropzone';
 
-import TradeTrackerService from '../../utils/TradeTrackerService';
-import TradeHistoryService from '../../utils/TradeHistoryService';
+import {getServiceContainer} from '../../utils/ServicesContainer';
 
 import TradeTrackerList    from './TradeTrackerList';
 import TradeTrackerForm    from './TradeTrackerForm'
@@ -22,8 +21,8 @@ class TradeTracker extends Component {
         constructor(){
            
             super();
-            this.tradeTrackerService = new TradeTrackerService();
-            this.TradeHistoryService = new TradeHistoryService();
+            this.tradeTrackerService = getServiceContainer().tracker;
+            this.TradeHistoryService = getServiceContainer().history;;
             
             this.state = {
                 data:  this.tradeTrackerService.getTrades(),
@@ -107,6 +106,7 @@ class TradeTracker extends Component {
             }else if(this.state.tradeAction === "CLOSE"){
               this.TradeHistoryService.create(trade);
               this.tradeTrackerService.delete(this.state.tradeIdx);
+              this.hideCloseFormModal()
             }
 
             this.hideModalVis();
@@ -147,39 +147,45 @@ class TradeTracker extends Component {
 
         render(){ 
             return (
-            <Grid.Column width	= {16} >
-                <Header as='h1'  textAlign = 'center' attached = 'top' className = "section-header">
-                    Trade Tracker  
-                <Icon className= "right-algn" name='plus' onClick = {this.newTrade}></Icon>
-                </Header>
+            <div className = "ui container" >   
+             <Grid>
+                   <Grid.Column width	= {16} >> 
+                        <Icon  size='big' className ='btn right-algn' name='plus' circular onClick = {this.newTrade}></Icon>
+                        <Header as='h1'  textAlign = 'center' attached = 'top' className = "section-header">
+                            <span>Trade Tracker  </span><span> </span>
+                        </Header>
+                   </Grid.Column>
+                  
 
-                <TradeTrackerList 
-                    trades      = {this.state.data} 
-                    editTrade   = {this.showEditTradeView}  
-                    viewTrade   = {this.showViewTrade}
-                    deleteTrade = {this.deleteTrade}
-                    closeTrade  = {this.showCloseTradeView}
-                />
-                <TradeTrackerForm 
-                    showModal = {this.state.showFormModal} 
-                    hideModal = {this.hideModalVis} 
-                    passData  = {this.handleSave} 
-                    trade     = {this.state.trade}
-                    action    = {this.state.tradeAction}
-                />
-                <TradeCloseForm 
-                    showModal = {this.state.showCloseFormModal} 
-                    hideModal = {this.hideCloseFormModal} 
-                    passData  = {this.handleSave} 
-                    trade     = {this.state.trade}
-                />
-                <TradeTrackerDetails
-                    showModal  = {this.state.showDetailsModal}
-                    trade      = {this.state.trade}
-                    hideModal  = {this.hideDetailModal}
-                />
+                    <TradeTrackerList 
+                        trades      = {this.state.data} 
+                        editTrade   = {this.showEditTradeView}  
+                        viewTrade   = {this.showViewTrade}
+                        deleteTrade = {this.deleteTrade}
+                        closeTrade  = {this.showCloseTradeView}
+                    />
+                    <TradeTrackerForm 
+                        showModal = {this.state.showFormModal} 
+                        hideModal = {this.hideModalVis} 
+                        passData  = {this.handleSave} 
+                        trade     = {this.state.trade}
+                        action    = {this.state.tradeAction}
+                    />
+                    <TradeCloseForm 
+                        showModal = {this.state.showCloseFormModal} 
+                        hideModal = {this.hideCloseFormModal} 
+                        passData  = {this.handleSave} 
+                        trade     = {this.state.trade}
+                    />
+                    <TradeTrackerDetails
+                        showModal  = {this.state.showDetailsModal}
+                        trade      = {this.state.trade}
+                        hideModal  = {this.hideDetailModal}
+                    />
 
-            </Grid.Column> 
+              
+               </Grid>  
+              </div>  
 
         )    
         }

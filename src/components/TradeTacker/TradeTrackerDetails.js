@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { Modal,  Statistic, Segment, Grid, Image} from 'semantic-ui-react'
+import { Modal,  Statistic, Segment, Grid, Image} from 'semantic-ui-react';
+
+// this may not be needed anymore
 import Dropzone from 'react-dropzone';
+
+import ForexChartContainer from '../Charts/ForexChartContainer';
 
 class TradeTrackerDetails extends Component {
 
@@ -43,21 +47,17 @@ class TradeTrackerDetails extends Component {
   render() { 
     return (  
             <Modal open = {this.props.showModal}>
-                <Modal.Header>
-                 <Segment inverted >
+                <Modal.Header  className = "section-background">
+                 <Segment inverted   >
                         <Statistic.Group  widths='two' items={this.state.trades} inverted color='green' />
                  </Segment>
+                   <Segment inverted>   {this.state.description} </Segment>
                  <span className ='close-btn' onClick ={this.props.hideModal}> X </span></Modal.Header>
-                <Modal.Content >
+                <Modal.Content  className = "section-background">
                     <Grid celled>
                         <Grid.Row>
-                        <Grid.Column width={4}>
-                            <Image src='http://semantic-ui.com/images/wireframe/image.png' />
-                            <Image src='http://semantic-ui.com/images/wireframe/image.png' />
-                             <Segment>   {this.state.description} </Segment>
-                        </Grid.Column>
-                        <Grid.Column width={12}>
-                            <Image src='http://semantic-ui.com/images/wireframe/image.png' />
+                        <Grid.Column width={16}>
+                           <ForexChartContainer  pair ="EUR_GBP"/>
                       
                         </Grid.Column>
                         </Grid.Row>

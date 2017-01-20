@@ -3,31 +3,57 @@ import Measure from 'react-measure'
 import {  Loader } from 'semantic-ui-react'
 
 
-import TradeDataService from '../../utils/TradeDataService';
 import {getServiceContainer} from '../../utils/ServicesContainer';
 import ForexChart from './ForexChart';
 import ChartControlContainer from './ForexChartControls/ChartControlContainer';
+import ChartWrap from './ChartWrapper';
+import {intitialDeviceWidth,  intitialDeviceHeight} from '../../utils/AppSettings'
 
 class ForexChartContainer extends Component {
     constructor(props) {
+        let chartHeight = 0;
+        if(intitialDeviceWidth < 700){
+            chartHeight = 220;
+        }else if(intitialDeviceWidth < 800){
+            chartHeight = 650;
+        }else{
+            chartHeight  = 825;
+        }
         super(props);
         this.state = {
             data : [],
             pair : "EUR_USD", 
             timeFrame: "15m",
-            chartType: "bar",
-            loading: false
+            chartType: "area",
+            loading: false,
+            containerDimensions: null,
+            chartStyle: {
+               
+                padding: '15px'
+            },
+            chartHeight: chartHeight
         }
         this.dataService    = getServiceContainer().data;
         this.pairClick      = this.pairClick.bind(this);
         this.timeFrameClick = this.timeFrameClick.bind(this);
         this.chartTypeClick = this.chartTypeClick.bind(this);
     }
+ 
 
     componentWillMount(){
-        return  this.dataService.getDefault15MinBars('EUR_USD')
+        setTimeout(function (params) {
+            console.log(intitialDeviceWidth, "width")
+            console.log(intitialDeviceHeight)
+        }, 200)
+        let pair = this.state.pair
+        if(this.props.pair){
+            pair = this.props.pair;
+            this.setState({
+                pair: this.props.pair
+            })
+        }
+        return  this.dataService.getDefault15MinBars(pair)
             .then(chartData => {
-                console.log(this.data)
                 this.setState({
                     data : chartData
             })
@@ -35,16 +61,15 @@ class ForexChartContainer extends Component {
     }
 
     pairClick(pair){
-        this.setState({pair : pair}, this.setData())
+        this.setState({pair : pair}, this.setData)
            
     }
 
     timeFrameClick(timeFrame){
-        console.log(timeFrame)
         this.setState(
             {
                 timeFrame: timeFrame
-            },  this.setData()
+            },  this.setData
         )
     }
     
@@ -53,8 +78,6 @@ class ForexChartContainer extends Component {
     }
 
     setData(){
-
-
         this.toggleLoader()
         let setStateData = d => this.setState( { data : d,  loading: false})
 
@@ -98,29 +121,29 @@ class ForexChartContainer extends Component {
         
         if(loading){
 
-            view =   <div className="chartWrapper">
+            view =   <ChartWrap>
                          <ChartControlContainer
-                            clickHandlers = { { pair : this.pairClick, timeFrame: this.timeFrameClick, chartType: this.chartTypeClick }}
+                            clickHandlers={ { pair : this.pairClick, timeFrame: this.timeFrameClick, chartType: this.chartTypeClick }}
                           />
-                         <Loader size = "massive" active inverted />
-                      </div>;
+                         <Loader size="massive" active inverted />
+                      </ChartWrap>;
 
         }else if(this.state.data.length > 0 ){
 
-            view =   <div className="chartWrapper"> 
+            view =   <ChartWrap styles = {this.state.chartStyle} >
                          <ChartControlContainer
-                            clickHandlers = { { pair : this.pairClick, timeFrame: this.timeFrameClick, chartType: this.chartTypeClick }}
+                            clickHandlers={ { pair : this.pairClick, timeFrame: this.timeFrameClick, chartType: this.chartTypeClick }}
                           />
                          <ForexChart
-                                width={this.state.containerDimensions.width} 
-                                height={this.state.containerDimensions.height - 60} 
+                            
+                                height={this.state.chartHeight} 
                                 data={data} 
-                                seriesType = {this.state.chartType}                      
+                                seriesType={this.state.chartType}                      
                          />		
-                     </div>
+                      </ChartWrap>;
 
         } else{
-             view =   <div className="chartWrapper"> <Loader size = "massive" active inverted /></div>;
+             view=<ChartWrap styles={this.state.chartWrapperStyle}><Loader size="massive" active inverted /> </ChartWrap>;;
         }
 
         return (

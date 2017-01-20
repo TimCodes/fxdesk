@@ -5,7 +5,7 @@ import {format} from 'd3';
 
 
 
-var { CandlestickSeries, OHLCSeries } = series;
+var { CandlestickSeries, OHLCSeries, AreaSeries } = series;
 var { XAxis, YAxis } = axes;
 let { CrossHairCursor, MouseCoordinateX, MouseCoordinateY } = coordinates;
 var { discontinuousTimeScaleProvider } = scale;
@@ -40,17 +40,27 @@ class ForexChart extends Component {
         switch(seriesType){
             case "candlestick" :  
                 series =  <CandlestickSeries
-                            fill = {d => d.close > d.open ? "#64b734" : "#d55a49"}
-                            opacity = {1}
+                            fill={d => d.close > d.open ? "#64b734" : "#d55a49"}
+                            opacity={1}
                         />
                 break;  
 
             case "bar" :  
                 series = <OHLCSeries
-                            stroke = {d => d.close > d.open ? "#64b734" : "#d55a49"}
-                            opacity = {1}
+                            stroke={d => d.close > d.open ? "#64b734" : "#d55a49"}
+                            opacity={1}
                         /> 
-                break;        
+                break; 
+
+            case "area" :  
+                series =  <AreaSeries
+                             yAccessor={(d) => d.close}
+                             opacity={.4}
+                             fill="#4059ce" 
+                          />       
+                break;    
+
+               
             }
 
          return series                
@@ -78,33 +88,33 @@ class ForexChart extends Component {
        return (
         	<ChartCanvas 
 					ratio={ratio} 
-					width={this.props.width} 
-					height={this.props.height - 60} 
-					margin={{ left: 50, right: 100, top: 10, bottom: 30 }} 
+					width={width} 
+					height={this.props.height} 
+					margin={{ left: 5, right: 100, top: 0, bottom: 30 }} 
                     seriesName = "forex"
                     type='hybrid'
 					data={this.props.data}
 					xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
 					xExtents={[this.state.minDate, this.state.maxDate]}
                     padding = {5}
-			>
+			  >
                 <Chart id={1} yExtents={d => [d.high, d.low]}>
-                        <YAxis
+                     <YAxis
                                 axisAt="right"
                                 orient="right"
                                 stroke= "white"
                                 tickStroke = "white"
-                                ticks={5}
+                                ticks={10}
                         />
                         <XAxis axisAt="bottom" orient="bottom"
-                                 stroke= "white"
-                                 tickStroke = "white"
+                                 stroke="white"
+                                 tickStroke ="white"
                                  ticks={5}
                         />
                         <MouseCoordinateX
                                  at="bottom"
                                  orient="left"
-                                 rectWidth = {125}
+                                 rectWidth={125}
                                  displayFormat={timeFormat("%y-%m-%dT%H:%M:%S")}
                         />
                         <MouseCoordinateY
@@ -125,12 +135,14 @@ ForexChart.propTypes = {
 	width: React.PropTypes.number.isRequired,
 	ratio: React.PropTypes.number.isRequired,
 	type: React.PropTypes.oneOf(["svg", "hybrid"]).isRequired,
-    seriesType: React.PropTypes.oneOf(['candlestick', 'bar']).isRequired
+    seriesType: React.PropTypes.oneOf(['candlestick', 'bar', 'area']).isRequired
+
 };
 
 ForexChart.defaultProps = {
 	type: "hybrid",
-    seriesType: 'bar'
+    seriesType: 'area'
+
 };
 
 ForexChart = fitWidth(ForexChart);

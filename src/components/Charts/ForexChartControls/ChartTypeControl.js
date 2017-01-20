@@ -15,10 +15,10 @@ class ChartTypeControl extends Component {
         return (
         <Menu tabular compact size = "tiny" >
 		  <Menu.Item name='candlestick' active={activeItem === 'candlestick'} onClick={this.handleItemClick} >
-            <Image src='/images/candlestick.png' size='mini'  bordered/>
+            <Image src='/images/candlestick.png' size='mini' />
           </Menu.Item>   
           <Menu.Item name='bar' active={activeItem === 'bar'} onClick={this.handleItemClick} >
-            <Image src='/images/bars.png' size='mini' bordered />
+            <Image src='/images/bars.png' size='mini' />
           </Menu.Item> 		
 		</Menu>
         );

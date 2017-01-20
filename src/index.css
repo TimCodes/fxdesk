@@ -7,14 +7,12 @@ body {
   background: #414141 !important;
   position: relative;
   color: white !important;
-  padding: 5px !important;
-  margin: 1px !important;
-  margin-top: 15px !important;  
-  left: 1%;
-  height: 90%;
+ 
+  margin-top: 5px;
+  margin-bottom: 5px;
   max-height: 1000px;
-  min-height: 800px;
-  width:98%;
+  min-height: 200px;
+  width:100%;
  
 }
 

@@ -1,0 +1,7 @@
+{
+  "extends": "react-app",
+   "rules": {
+    "react/jsx-equals-spacing": 0
+  //  "react/jsx-equals-spacing": [2, "always"]
+  }
+}

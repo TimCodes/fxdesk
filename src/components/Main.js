@@ -40,11 +40,11 @@ class Main extends Component {
     return (
         <div onClick={this.dimVisibility} >
           <ChartSidebar   visible={this.state.visible} />
-          <div className = "ui container fluid " > 
+    
             <div className="ui black small launch right attached fixed button" onClick={this.toggleVisibility}>
               <i className="content icon"></i>
             </div>
-          </div>
+        
           <div className="ui container fluid">
             {this.props.children}
           </div>

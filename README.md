@@ -184,6 +184,11 @@ Then add this block to the `package.json` file of your project:
   // ...
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/jsx-equals-spacing": false
   }
 }
 ```

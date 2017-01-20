@@ -7,7 +7,7 @@ import {format} from 'd3'
 import TradeHistoryService from '../../utils/TradeHistoryService';
 
 
-let { BarSeries, LineSeries, AreaSeries, ScatterSeries, CircleMarker, SquareMarker, TriangleMarker } = series;
+let {  AreaSeries } = series;
 let { discontinuousTimeScaleProvider } = scale;
 
 let { CrossHairCursor, MouseCoordinateX, MouseCoordinateY } = coordinates;
@@ -40,15 +40,15 @@ class TradeEquityChart extends Component {
             }).catch(e => console.log(e))
     }
     render(){
-         let { data, type, width, ratio } = this.props;
+         let { data, type, width, ratio, height } = this.props;
          if(this.state.data.length < 1 ){
              return <Grid.Row />
          }else{
          return (
             <Grid.Row>
                 <Grid.Column width={16}>
-                    <ChartCanvas ratio={ratio} width={width} height={400}
-                            margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
+                    <ChartCanvas ratio={ratio} width={width} height={300}
+                            margin={{ left: 10, right: 70, top: 20, bottom: 30 }}
                             type={type}
                             pointsPerPxThreshold={1}
                             
@@ -78,24 +78,15 @@ class TradeEquityChart extends Component {
                                 at="right"
 
                                 displayFormat={format(".2f")} />
-                            <LineSeries
-                                yAccessor={d => d.equity}
-                                stroke="#4059ce" />
-                            <ScatterSeries
-                                yAccessor={d => d.equity}
-                                onClick = {this.hello}
-                                marker={TriangleMarker}
-
-                                displayFormat={format(".2f")}     
-                                  
-                            />
-                           
-
-                           
-                        </Chart>
-                        <CrossHairCursor />
+                        
+                            <AreaSeries
+                                yAccessor={(d) =>  d.equity}
+                                opacity={.3}
+                                fill="#2699f1" 
+                            />          
+                         </Chart>
+                         <CrossHairCursor />
                 </ChartCanvas>
-
                 </Grid.Column>
             </Grid.Row> 
                   

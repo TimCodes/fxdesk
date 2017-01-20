@@ -1,5 +1,5 @@
     import React, { Component } from 'react';
-    import {Grid, Image, Table, Icon, Segment, Statistic } from 'semantic-ui-react'
+    import {Grid, Image, Table, Icon, Segment, Statistic, Header } from 'semantic-ui-react'
 
     import TradeEquityChart          from './TradeEquityChart';
     import TradePortfolioStats       from './TradePortfolioStats';
@@ -42,7 +42,12 @@
 
         render(){ 
             return (
-                   <div className = "ui container">
+                <div className = "ui container" >   
+                 <Grid>
+                   <Grid.Column width =  {16}  >
+                        <Header as='h1'  textAlign = 'center' attached = 'top' className = "section-header">
+                            <span>History </span>
+                        </Header>
                         <div className = "chartWrapper" >
                             <TradeEquityChart />
                         </div>
@@ -55,6 +60,8 @@
                         />
                      
                        <TradePortfolioTradesTable  trades = {this.state.trades} />
+                       </Grid.Column>
+                     </Grid>  
                  </div> 
             )    
         }

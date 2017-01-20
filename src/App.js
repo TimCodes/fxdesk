@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import { Router, Route, hashHistory, IndexRoute, Link} from 'react-router';
-import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from 'semantic-ui-react'
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+
 
 
 import ForexChartContainer from './components/Charts/ForexChartContainer';
-import ChartSidebar        from './components/ChartSidebar';
+
 import TradeTracker        from './components/TradeTacker/TradeTracker';
 import TradePortfolio      from './components/TradePortfolio/TradePortfolio';
 import TradeTool           from './components/TradeTool';
 import News                from './components/News';
 import Dashboard           from './components/Dashboard';
-import Portfolio           from './components/Portfolio';
+// /import Portfolio           from './components/Portfolio';
 import EconomicCalender    from './components/EconomicCalender';
 import Main                from './components/Main';
 
 
 
-import logo from './logo.svg';
+
 import './App.css';
 
 class App extends Component{
@@ -40,10 +40,7 @@ class App extends Component{
 
 // <CandleStickChart data={this.props.data} type={'hybrid'} />
 
-function chartWrapper(data ){
 
-
-}
 
 export default App;
 

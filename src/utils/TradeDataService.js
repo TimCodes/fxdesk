@@ -21,10 +21,7 @@ class TradeDataService {
     return axios.get(URL, {headers: headers})
 			.then(res => res.data.candles)
 			.then( candles => {
-			 let formated = candles.map(candle =>{
-
-				   
-				
+			 let formated = candles.map(candle =>{		   		
 				 	let newCandle = {
 						 date  : new Date(candle.time) , 
 						 open  : +candle.openAsk,
@@ -49,6 +46,11 @@ class TradeDataService {
    getDefault15MinBars(pair){
     return this.getRecentBars('M15', pair)
   }
+
+  // getLastBar(pair, timeFrame){
+  //   let start = new Date()
+  //   start.setMinutes(this.)
+  // }
   
   getRecentBars(timeFrame, pair){
     let start = calcEndDate(timeFrame)

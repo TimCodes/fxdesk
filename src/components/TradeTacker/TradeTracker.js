@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Card, Image, Segment, Flag, Dropdown, Grid, Header, Icon, Modal, Form, Checkbox } from 'semantic-ui-react'
-import Dropzone from 'react-dropzone';
+import {  Grid, Header, Icon } from 'semantic-ui-react'
+//import Dropzone from 'react-dropzone';
 
 import {getServiceContainer} from '../../utils/ServicesContainer';
 
@@ -8,10 +8,6 @@ import TradeTrackerList    from './TradeTrackerList';
 import TradeTrackerForm    from './TradeTrackerForm'
 import TradeCloseForm      from './TradeCloseForm'
 import TradeTrackerDetails from './TradeTrackerDetails';
-
-    const trigger = (
-    <i className="ellipsis vertical icon right floated"></i>
-    )
 
     // TODO : refactor fucntion naems foor 
     // actions that just change view
@@ -147,18 +143,19 @@ class TradeTracker extends Component {
 
         render(){ 
             return (
+        
             <div className = "ui container" >   
              <Grid>
                    <Grid.Column width	= {16} >> 
-                        <Icon  size='big' className ='btn right-algn' name='plus' circular onClick = {this.newTrade}></Icon>
-                        <Header as='h1'  textAlign = 'center' attached = 'top' className = "section-header">
+                        <Icon  size='big' className='btn right-algn' name='plus' circular onClick={this.newTrade}></Icon>
+                        <Header as='h1'  textAlign= 'center' attached='top' className="section-header">
                             <span>Trade Tracker  </span><span> </span>
                         </Header>
                    </Grid.Column>
                   
 
                     <TradeTrackerList 
-                        trades      = {this.state.data} 
+                        trades      ={this.state.data} 
                         editTrade   = {this.showEditTradeView}  
                         viewTrade   = {this.showViewTrade}
                         deleteTrade = {this.deleteTrade}

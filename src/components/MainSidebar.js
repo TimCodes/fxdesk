@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Sidebar, Menu, Icon } from 'semantic-ui-react'
 
 
-class ChartSidebar extends Component {
+class MainSidebar extends Component {
 
     render(){ return (
         <Sidebar as={Menu} animation='overlay' width='very thin' visible={this.props.visible} icon='labeled' vertical inverted>
@@ -28,25 +28,27 @@ class ChartSidebar extends Component {
                 <Icon name='book' className = "whiteIcon" />
               </Menu.Item>
             </Link>
-            <Link to="calender">
-              <Menu.Item name='calender' fitted>
-                <Icon name='calendar' className = "whiteIcon" />
-              </Menu.Item>
-             </Link> 
-            <Link to="news"> 
-              <Menu.Item name='news' fitted>
-                <Icon name='newspaper' className = "whiteIcon" />
-              </Menu.Item>
-            </Link>  
-            <Link to="tools"> 
-              <Menu.Item name='calculator' fitted>
-                <Icon name='calculator' className = "whiteIcon" />
-              </Menu.Item>
-            </Link>
+    
            </Menu> 
           </Sidebar>
     )    
     }
 }
 
-export default ChartSidebar 
+export default MainSidebar 
+
+        // <Link to="calender">
+        //       <Menu.Item name='calender' fitted>
+        //         <Icon name='calendar' className = "whiteIcon" />
+        //       </Menu.Item>
+        //      </Link> 
+        //     <Link to="news"> 
+        //       <Menu.Item name='news' fitted>
+        //         <Icon name='newspaper' className = "whiteIcon" />
+        //       </Menu.Item>
+        //     </Link>  
+        //     <Link to="tools"> 
+        //       <Menu.Item name='calculator' fitted>
+        //         <Icon name='calculator' className = "whiteIcon" />
+        //       </Menu.Item>
+        //     </Link>

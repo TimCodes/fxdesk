@@ -89,6 +89,9 @@ class TradeHistoryService {
     /// need to find a better way to adjust 
     // intialzie start date for equity instead of magic string
     generateEquityArr(){
+      let dates   = this.trades.map(d => new Date(d.openDate));
+      let minDate = new Date(Math.min.apply(null,dates));  
+    
       let equityArr = this.trades
                         .reduce( (acc, trade, idx, arr) => {   
                         let equityObj = {
@@ -98,7 +101,7 @@ class TradeHistoryService {
                         acc.push(equityObj);  
                         return acc;
                         }, 
-                        [{ equity: this.equity, date: '01/01/2006' } ]);             
+                        [{ equity: this.equity, date: minDate } ]);             
       return equityArr;
     }
      
@@ -110,12 +113,12 @@ class TradeHistoryService {
                             })
         return formatedArr;                    
     }
-    // need to append pnl to returns to get actuall return values
-    // right now this is broken
+   
     getMaxDD(){
+
         let returns = this.generateEquityArr()
                       .map(e => e.equity)
-        //this.trades.map( trade => Number(trade.PNL) );
+        
         let maxIdx = 0; 
         let prevMaxIdx = 0; 
         let prevMinIdx  = 0;
@@ -130,25 +133,11 @@ class TradeHistoryService {
             }
         })
 
-        console.log(prevMaxIdx, prevMinIdx, maxIdx)
+       
         return returns[prevMaxIdx] - returns[prevMinIdx];
     }
 
-    getEquityTestdata(){
-         return fetch("http://rrag.github.io/react-stockcharts/data/MSFT.tsv")
-            .then(response => response.text())
-            .then(data => tsvParse(data, d => {
-                d.date = new Date(parseDate(d.date).getTime());
-                d.open = +d.open;
-                d.high = +d.high;
-                d.low = +d.low;
-                d.close = +d.close;
-                d.volume = +d.volume;
-
-                return d;
-            }))
-    }
-
+  
 
 }
 

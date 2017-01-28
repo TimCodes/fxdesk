@@ -3,7 +3,7 @@ import { Router, Route, hashHistory, IndexRoute, Link} from 'react-router';
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container, Grid } from 'semantic-ui-react'
 
 
-import ChartSidebar  from './ChartSidebar';
+import MainSidebar  from './MainSidebar';
 
 
 import {init} from '../utils/ServicesContainer';
@@ -39,12 +39,10 @@ class Main extends Component {
     const { visible } = this.state
     return (
         <div onClick={this.dimVisibility} >
-          <ChartSidebar   visible={this.state.visible} />
-    
-            <div className="ui black small launch right attached fixed button" onClick={this.toggleVisibility}>
+          <MainSidebar   visible={this.state.visible} />
+          <div className="ui black small launch right attached fixed button" onClick={this.toggleVisibility}>
               <i className="content icon"></i>
-            </div>
-        
+          </div>
           <div className="ui container fluid">
             {this.props.children}
           </div>
@@ -56,10 +54,7 @@ class Main extends Component {
 
 // <CandleStickChart data={this.props.data} type={'hybrid'} />
 
-function chartWrapper(data ){
 
-
-}
 
 export default Main;
 

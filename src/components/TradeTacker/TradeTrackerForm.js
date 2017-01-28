@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import { Button,  Dropdown, Grid, Header, Icon, Modal, Form, Checkbox, TextArea } from 'semantic-ui-react'
+import { Button,  Dropdown, Grid, Header, Icon, Modal, Form, Checkbox, TextArea, Select } from 'semantic-ui-react'
 import Dropzone from 'react-dropzone';
-
 
 
 class TradeTrackerForm extends Component {
 
    constructor(props) {
     super(props);
-    this.state = { formData: {} };
+    this.state = {
+         formData: {} ,
+         pairOptions: this.props.pairs.map(p =>  { return { text: p, value: p } } )
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this)
-    console.log("-- form props --", this.props)
-    
   }
 
   handleSubmit = (e, { formData }) => {
@@ -22,14 +22,11 @@ class TradeTrackerForm extends Component {
   }
 
   passData(){
-      console.log(this.state)
+      console.log(this.state.formData)
       this.props.passData(this.state.formData);
   }
 
   componentWillReceiveProps(nextProps, nextState){
-    // perform any preparations for an upcoming update
-    console.log("tadee form update hook")
-    console.log(nextProps)
     if(nextProps.trade){
         this.setState({
             formData: nextProps.trade
@@ -41,7 +38,8 @@ class TradeTrackerForm extends Component {
       console.log(this.state)
   }
   
-  handleChange = (e, { value }) => this.setState({ value })
+  handleChange = (e, { value }) => this.setState({ value }, this.logChange)
+
 
   handleTextAreaChange(e){
       console.log(e.target.value)
@@ -58,7 +56,7 @@ class TradeTrackerForm extends Component {
                 <Form onSubmit = {this.handleSubmit} >
                  <Form.Field>
                    <label>Pair</label>
-                    <input   placeholder='EURUSD' value = {this.state.formData.pair}  onChange = {this.handleChange} name = "pair"/>
+                    <Select placeholder='Select Pair' options={this.state.pairOptions} value = {this.state.formData.pair} name = "pair" onChange={this.handleChange} />
                  </Form.Field>
                  <Form.Field>
                    <label>Status</label>
@@ -77,7 +75,7 @@ class TradeTrackerForm extends Component {
                    value = {this.state.formData.description}  
                    onChange = {this.handleTextAreaChange}
                  />
-                </Form.Field> 
+                </Form.Field>     
                <Button  type='submit'>Submit</Button>
               </Form>
                </Modal.Content>
@@ -87,8 +85,3 @@ class TradeTrackerForm extends Component {
 }
 
 export default TradeTrackerForm;
-
-
-//   <Dropzone >
-//                     <div>Try dropping some files here, or click to select files to upload.</div>
-//                </Dropzone>

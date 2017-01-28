@@ -28,17 +28,14 @@ class TradeEquityChart extends Component {
     }
 
     componentWillMount(){
-        return  this.dataService.getEquityTestdata()
-            .then(chartData => {
-                console.log(chartData)
-                this.setState({
-                    data :this.dataService.formatEquityArr()
-                 })
-                this.dataService.generateEquityArr()
-                console.log(this.dataService.formatEquityArr())
-  
-            }).catch(e => console.log(e))
+       
+                    this.setState({
+                        data :this.dataService.formatEquityArr()
+                    })
+                  
+           
     }
+
     render(){
          let { data, type, width, ratio, height } = this.props;
          if(this.state.data.length < 1 ){
@@ -82,7 +79,7 @@ class TradeEquityChart extends Component {
                             <AreaSeries
                                 yAccessor={(d) =>  d.equity}
                                 opacity={.3}
-                                fill="#2699f1" 
+                                fill="#4059ce" 
                             />          
                          </Chart>
                          <CrossHairCursor />

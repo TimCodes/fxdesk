@@ -18,10 +18,12 @@ class TradeTracker extends Component {
            
             super();
             this.tradeTrackerService = getServiceContainer().tracker;
-            this.TradeHistoryService = getServiceContainer().history;;
+            this.TradeHistoryService = getServiceContainer().history;
+            this.TradeDataService    = getServiceContainer().data;
             
             this.state = {
                 data:  this.tradeTrackerService.getTrades(),
+                availablePairs : this.TradeDataService.getAvailablePairs(),
                 visible: true,
                 showFormModal : false,
                 showDetailsModal : false,
@@ -29,8 +31,10 @@ class TradeTracker extends Component {
                 trade : {},
                 tradeIdx: null,
                 tradeAction: null
+
             };
 
+            console.log(this.TradeDataService.convertPairString("EURUSD"))
             this.showModalVis       = this.showModalVis.bind(this);
             this.hideModalVis       = this.hideModalVis.bind(this);
             this.hideDetailModal    = this.hideDetailModal.bind(this);
@@ -78,6 +82,7 @@ class TradeTracker extends Component {
         }
 
         addTrade(trade){
+            console.log(trade)
             this.tradeTrackerService.create(trade);
             this.updateTradeList();
         }
@@ -144,8 +149,8 @@ class TradeTracker extends Component {
         render(){ 
             return (
         
-            <div className = "ui container" >   
-             <Grid>
+         
+             <Grid doubling padded className = "padded-grid">
                    <Grid.Column width	= {16} >> 
                         <Icon  size='big' className='btn right-algn' name='plus' circular onClick={this.newTrade}></Icon>
                         <Header as='h1'  textAlign= 'center' attached='top' className="section-header">
@@ -167,6 +172,7 @@ class TradeTracker extends Component {
                         passData  = {this.handleSave} 
                         trade     = {this.state.trade}
                         action    = {this.state.tradeAction}
+                        pairs     = {this.state.availablePairs}
                     />
                     <TradeCloseForm 
                         showModal = {this.state.showCloseFormModal} 
@@ -182,7 +188,7 @@ class TradeTracker extends Component {
 
               
                </Grid>  
-              </div>  
+              
 
         )    
         }

@@ -10,59 +10,78 @@ import ChartWrap from './ChartWrapper';
 import {intitialDeviceWidth,  intitialDeviceHeight} from '../../utils/AppSettings'
 
 class ForexChartContainer extends Component {
+    
     constructor(props) {
         let chartHeight = 0;
+        super(props);
         if(intitialDeviceWidth < 700){
             chartHeight = 220;
+            this.setState({
+                chartType: 'area'
+            })
         }else if(intitialDeviceWidth < 800){
             chartHeight = 650;
         }else{
             chartHeight  = 825;
         }
-        super(props);
+   
+        
+        this.dataService    = getServiceContainer().data;
+        this.pairClick      = this.pairClick.bind(this);
+        this.timeFrameClick = this.timeFrameClick.bind(this);
+        this.chartTypeClick = this.chartTypeClick.bind(this);
+
         this.state = {
             data : [],
-            pair : "EUR_USD", 
+            pair : {
+                text: "EURUSD",
+                value: "EUR_USD"
+            } ,
             timeFrame: "15m",
-            chartType: "area",
+            chartType: "bar",
             loading: false,
             containerDimensions: null,
+            pairs: this.dataService.getAvailablePairs(),
             chartStyle: {
                
                 padding: '15px'
             },
             chartHeight: chartHeight
         }
-        this.dataService    = getServiceContainer().data;
-        this.pairClick      = this.pairClick.bind(this);
-        this.timeFrameClick = this.timeFrameClick.bind(this);
-        this.chartTypeClick = this.chartTypeClick.bind(this);
     }
  
 
     componentWillMount(){
-        setTimeout(function (params) {
-            console.log(intitialDeviceWidth, "width")
-            console.log(intitialDeviceHeight)
-        }, 200)
-        let pair = this.state.pair
-        if(this.props.pair){
-            pair = this.props.pair;
-            this.setState({
-                pair: this.props.pair
-            })
+        console.log('--- container paiers ----- ', this.state.pairs)
+        let state = {};
+
+        if(this.props.height){
+            state.chartHeight = this.props.height
         }
-        return  this.dataService.getDefault15MinBars(pair)
-            .then(chartData => {
-                this.setState({
-                    data : chartData
-            })
-            }).catch(e => console.log(e))
+
+        if(intitialDeviceWidth < 700){
+          state.chartType = 'area';
+        }
+
+      
+        if(this.props.pair){
+            let pair = this.dataService.convertPairString(this.props.pair)
+            state.pair = {
+                    text: this.props.pair,
+                    value: pair
+                } 
+
+        }
+
+        this.setState(state, this.setData)
+        
+        
     }
 
+    
     pairClick(pair){
-        this.setState({pair : pair}, this.setData)
-           
+        var formatedPair = this.dataService.convertPairString(pair);
+        this.setState({pair : { text: pair, value: formatedPair } }, this.setData);
     }
 
     timeFrameClick(timeFrame){
@@ -83,17 +102,17 @@ class ForexChartContainer extends Component {
 
         switch(this.state.timeFrame){
             case '15m':
-                this.dataService.getDefault15MinBars(this.state.pair)
+                this.dataService.getDefault15MinBars(this.state.pair.value)
                                 .then(setStateData)
                                 .catch(handleError)
                  break;
             case '1h':
-                this.dataService.getDefaultHourBars(this.state.pair)
+                this.dataService.getDefaultHourBars(this.state.pair.value)
                                 .then(setStateData)
                                 .catch(handleError)    
                  break; 
             case '4h':
-                 this.dataService.getDefault4HourBars(this.state.pair)
+                 this.dataService.getDefault4HourBars(this.state.pair.value)
                                  .then(setStateData)
                                  .catch(handleError)           
                  break;           
@@ -105,8 +124,6 @@ class ForexChartContainer extends Component {
         }
     }
 
-   
-   
 
     toggleLoader(){
         this.setState({
@@ -124,6 +141,8 @@ class ForexChartContainer extends Component {
             view =   <ChartWrap>
                          <ChartControlContainer
                             clickHandlers={ { pair : this.pairClick, timeFrame: this.timeFrameClick, chartType: this.chartTypeClick }}
+                            pairs={this.state.pairs}
+                            pair={this.state.pair.text}
                           />
                          <Loader size="massive" active inverted />
                       </ChartWrap>;
@@ -133,9 +152,9 @@ class ForexChartContainer extends Component {
             view =   <ChartWrap styles = {this.state.chartStyle} >
                          <ChartControlContainer
                             clickHandlers={ { pair : this.pairClick, timeFrame: this.timeFrameClick, chartType: this.chartTypeClick }}
+                            pairs={this.state.pairs}
                           />
-                         <ForexChart
-                            
+                         <ForexChart                    
                                 height={this.state.chartHeight} 
                                 data={data} 
                                 seriesType={this.state.chartType}                      
@@ -143,7 +162,7 @@ class ForexChartContainer extends Component {
                       </ChartWrap>;
 
         } else{
-             view=<ChartWrap styles={this.state.chartWrapperStyle}><Loader size="massive" active inverted /> </ChartWrap>;;
+             view= <ChartWrap styles={this.state.chartWrapperStyle}><Loader size="massive" active inverted /> </ChartWrap>;;
         }
 
         return (

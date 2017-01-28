@@ -10,9 +10,22 @@ var candleDateParse = timeParse("%Y-%m-%dT%H:%M:%S.%LZ")
 class TradeDataService {
 
 	constructor(accountId, authToken){
-    this.baseCandleUrl = `https://api-fxpractice.oanda.com/v1/candles?`
-    this.accountId     = accountId;
-    this.token         = authToken;
+    this.baseCandleUrl  = `https://api-fxpractice.oanda.com/v1/candles?`
+    this.accountId      = accountId;
+    this.token          = authToken;
+    this.availablePairs = [
+      "EURUSD",
+      "GBPUSD",
+      "AUDUSD",
+      "NZDUSD",
+      "USDJPY",
+      "USDCAD",
+      "USDCHF"
+    ]
+  }
+
+  getAvailablePairs(){
+    return this.availablePairs;
   }
   
   getOHLCData(pair, start, end, timeFrame){
@@ -44,13 +57,17 @@ class TradeDataService {
   }
   
    getDefault15MinBars(pair){
+     console.log("--- get data ---", pair)
     return this.getRecentBars('M15', pair)
   }
 
-  // getLastBar(pair, timeFrame){
-  //   let start = new Date()
-  //   start.setMinutes(this.)
-  // }
+  //converts pair string to Oanda format
+  // eg. "EURUSD" becomes "EUR_USD"
+  convertPairString(pair){
+    let pairArr = pair.split("");
+    pairArr.splice(3,0, "_")
+    return pairArr.join("");
+  }
   
   getRecentBars(timeFrame, pair){
     let start = calcEndDate(timeFrame)
@@ -80,21 +97,8 @@ class TradeDataService {
     }
   
   }
-    getTestData(){
-        return fetch("http://rrag.github.io/react-stockcharts/data/MSFT.tsv")
-		.then(response => response.text())
-		.then(data => tsvParse(data, d => {
-			
-			d.date = new Date(parseDate(d.date).getTime());
-			d.open = +d.open;
-			d.high = +d.high;
-			d.low = +d.low;
-			d.close = +d.close;
-			d.volume = +d.volume;
-
-			return d;
-		}))
-    }
+   
+    
 }
 
 export default TradeDataService;

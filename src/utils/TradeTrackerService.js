@@ -47,7 +47,6 @@ class TradeTrackerService {
 
     update(tradeIdx, updatedTrade){
         this.trades[tradeIdx] = updatedTrade;
-        console.log("update trade service", tradeIdx, updatedTrade)
     };
 
     delete(idx){

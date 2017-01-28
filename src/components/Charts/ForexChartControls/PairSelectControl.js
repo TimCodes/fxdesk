@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Menu,  Dropdown} from 'semantic-ui-react' ;
+import { Menu,  Dropdown, Select} from 'semantic-ui-react' ;
 
 
 let pairOptions = [
@@ -12,34 +12,34 @@ class PairSelectControl extends Component {
 	
 	 constructor(props) {
 		super(props)
-		this.c= this.c.bind(this)
-	}
-
-  	state = { activeItem: '15m',
-		   	  containerDimensions: {}
+		this.state = { 
+		  	  activeItem: '15m',
+		   	  containerDimensions: {},
+			  pairOptions: this.props.pairs.map(p =>  { return { text: p, value: p } } ),
+			  pair: "EURUSD"
 		    }
 	
-	handleItemClick = (e) => { 
-						
-						setTimeout(e =>  { 
-							let value = this.textInput.getSelectedItem().value
-							this.props.pairClick(value)
-						}, 10)
-                        // this.setState({ activeItem: name })
-                       }  
-	c = (e) => console.log(e)
+	 }
+    
+	 componentWillMount(){
+		 if(this.props.pair){
+			 this.setState({pair: this.props.pair})
+		 }
+	 }
+  
+	
+	handleChange = (e, { value }) => this.props.pairClick(value) 
+
     render() {
-        const { activeItem } = this.state;
         return (
             <Menu.Item>
-             <Dropdown 
-			 	placeholder='EURUSD' 
-				fluid 
-				options={pairOptions} 
-				className = "section-background"
-				onChange = {this.handleItemClick}	
-				ref={(input) => { this.textInput = input; }}
-			 />
+            
+			   <Select className = "section-background" 
+			   	placeholder= {this.state.pair} 
+			    options={this.state.pairOptions} 
+				name = "pair" 
+				onChange = {this.handleChange}
+			    />
             </Menu.Item> 
         );
     }

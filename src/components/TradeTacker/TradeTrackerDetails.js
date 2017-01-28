@@ -14,15 +14,11 @@ class TradeTrackerDetails extends Component {
         trades  : [],
         description: ''    
     }
+    console.log(this.props)
     
   }
 
-  
-  passData(){
-      console.log(this.state)
-       
-      this.props.passData(this.state.formData);
-  }
+
 
   componentWillReceiveProps(nextProps, nextState){
     let trade = nextProps.trade;
@@ -48,19 +44,16 @@ class TradeTrackerDetails extends Component {
     return (  
             <Modal open = {this.props.showModal}>
                 <Modal.Header  className = "section-background">
-                 <Segment inverted   >
+                 <Segment inverted >
                         <Statistic.Group  widths='two' items={this.state.trades} inverted color='green' />
                  </Segment>
                    <Segment inverted>   {this.state.description} </Segment>
                  <span className ='close-btn' onClick ={this.props.hideModal}> X </span></Modal.Header>
                 <Modal.Content  className = "section-background">
                     <Grid celled>
-                        <Grid.Row>
                         <Grid.Column width={16}>
-                           <ForexChartContainer  pair ="EUR_GBP"/>
-                      
+                           <ForexChartContainer  pair ={this.props.trade.pair} height =  {400} />
                         </Grid.Column>
-                        </Grid.Row>
                     </Grid>
                </Modal.Content>
             </Modal>

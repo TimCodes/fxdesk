@@ -42,8 +42,7 @@
 
         render(){ 
             return (
-                <div className = "ui container" >   
-                 <Grid>
+              <Grid doubling columns={1} padded className = "padded-grid">
                    <Grid.Column width =  {16}  >
                         <Header as='h1'  textAlign = 'center' attached = 'top' className = "section-header">
                             <span>History </span>
@@ -61,8 +60,8 @@
                      
                        <TradePortfolioTradesTable  trades = {this.state.trades} />
                        </Grid.Column>
-                     </Grid>  
-                 </div> 
+              </Grid>  
+                
             )    
         }
     }

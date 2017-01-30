@@ -9,7 +9,9 @@ class TradeTrackerForm extends Component {
     super(props);
     this.state = {
          formData: {} ,
-         pairOptions: this.props.pairs.map(p =>  { return { text: p, value: p } } )
+         pairOptions: this.props.pairs.map(p =>  { return { text: p, value: p } } ),
+         statusOptions : [{text: 'TRACKING', value: "TRACKING"} , {text: 'OPEN', value: "OPEN" }  ],
+         sideOptions : [{text: 'BUY', value: "BUY"} , {text: 'SELL', value: "SELL" }  ]
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -56,11 +58,19 @@ class TradeTrackerForm extends Component {
                 <Form onSubmit = {this.handleSubmit} >
                  <Form.Field>
                    <label>Pair</label>
-                    <Select placeholder='Select Pair' options={this.state.pairOptions} value = {this.state.formData.pair} name = "pair" onChange={this.handleChange} />
+                    <Select 
+                         placeholder='Select Pair' options={this.state.pairOptions} 
+                         value = {this.state.formData.pair} name = "pair" onChange={this.handleChange} 
+                         className = "section-background"
+                     />
                  </Form.Field>
                  <Form.Field>
                    <label>Status</label>
-                   <input placeholder='Tracking' value = {this.state.formData.status}  onChange = {this.handleChange} name = "status" />
+                    <Select 
+                        placeholder='TRACKING' options={this.state.statusOptions} 
+                        value = {this.state.formData.status} name = "status" onChange={this.handleChange} 
+                        className = "section-background"
+                  />
                  </Form.Field>
                  <Form.Field>
                    <label>Setup Type</label>
@@ -68,13 +78,17 @@ class TradeTrackerForm extends Component {
                 </Form.Field>
                 <Form.Field>
                     <label>Side</label>
-                    <input placeholder='Buy' name = "side" value = {this.state.formData.side}  onChange = {this.handleChange} />
+                    <Select 
+                        placeholder='BUY' options={this.state.sideOptions} 
+                        value =  {this.state.formData.status} name = "side" onChange={this.handleChange}
+                        className = "section-background"
+                    />
                 </Form.Field>
-                 <Form.Field>
-                <TextArea label='Description' name = "description" placeholder='.'
-                   value = {this.state.formData.description}  
-                   onChange = {this.handleTextAreaChange}
-                 />
+                <Form.Field>
+                    <TextArea label='Description' name = "description" placeholder='Give a description'
+                    value = {this.state.formData.description}  
+                    onChange = {this.handleTextAreaChange}
+                    />
                 </Form.Field>     
                <Button  type='submit'>Submit</Button>
               </Form>

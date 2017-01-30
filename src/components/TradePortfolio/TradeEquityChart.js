@@ -28,12 +28,9 @@ class TradeEquityChart extends Component {
     }
 
     componentWillMount(){
-       
-                    this.setState({
-                        data :this.dataService.formatEquityArr()
-                    })
-                  
-           
+       this.setState({
+        data :this.dataService.formatEquityArr()
+       })
     }
 
     render(){

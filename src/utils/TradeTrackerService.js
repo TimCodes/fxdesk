@@ -12,14 +12,14 @@ class TradeTrackerService {
             },
             {
                 pair: "GPBUSD",
-                status: "Tracking",
+                status: "TRACKING",
                 setupType: "6x6",
                 description: "its a trade",
                 side: 'SELL'
             },
             {
                 pair: "NZDJPY",
-                status: "Tracking",
+                status: "TRACKING",
                 setupType: "6x6",
                 description: "its a trade",
                 side: 'BUY'
@@ -33,7 +33,7 @@ class TradeTrackerService {
             },
             {
                 pair: "USDJPY",
-                status: "Tracking",
+                status: "TRACKING",
                 setupType: "6x6",
                 description: "its a trade",
                 side: 'BUY'

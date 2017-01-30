@@ -51,7 +51,14 @@ class TradeHistoryService {
     }
 
     create(trade){
-        this.trades.push(trade);
+        console.log('--- create trade hisotry --')
+        console.log(trade)
+        console.log('--- end create trade hisotry --')
+        // trade.openDate = String(trade.openDate)
+        // trade.closdeDate = String(trade.closeDate)
+        
+         this.trades.push(trade);
+        return 'hi'
     };
 
     update(tradeIdx, updatedTrade){

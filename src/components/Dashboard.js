@@ -12,58 +12,59 @@ class Dashboard extends Component {
             super(props);
 
             this.state = {
-                
-                trades     : []
-                
+                activeTrades         : [],
+                openActiveTrades     : [],
+                trackingActiveTrades : []
             };
 
-            this.dataService = getServiceContainer().history;
+            this.histroyService = getServiceContainer().history;
+            this.trackerService = getServiceContainer().tracker;
     }
 
     componentWillMount(){
+           this.setState({
+             activeTrades     :  this.trackerService.getTrades(),
+           }, this.setTrades)
+    } 
 
-         this.setState({
-            trades     :  this.dataService.getTrades(),
-           
-         })
-    }     
+    setTrades(){
+        console.log("--- set trades ----")
+        this.setState({
+            openActiveTrades: this.state.activeTrades.filter(t => t.status === "OPEN"),
+            trackingActiveTrades: this.state.activeTrades.filter(t => t.status === "TRACKING")
+        })
+    }    
     render(){ 
+      console.log("--- dboard state ---", this.state)
         return (
             
                 <Grid doubling columns={2} padded className = "padded-grid">
                      <Grid.Column  computer = {10} >
-                       
                             <Header as='h1'  textAlign= 'center' attached='top' className="section-header">
                               Charts
                            </Header>
-                            <ForexChartContainer  pair ="EUR_GBP" height =  {300} />
-                      
+                            <ForexChartContainer  pair ="EURGBP" height =  {300} />
                             <Header as='h1'  textAlign= 'center' attached='top' className="section-header">
                              Equity
                            </Header>
                              <TradeEquityChart />
                      </Grid.Column>
                      <Grid.Column  computer = {6}>
-                    
                             <Header as='h1'  textAlign= 'center' attached='top' className="section-header">
                                 Tracking
                             </Header>
                             <Segment.Group inverted size = 'large'>
-                                <Segment inverted>EURUSD   <Divider  vertical/>  Buy</Segment>
-                                <Segment inverted>GBPUSD</Segment>
-                                <Segment inverted>EURJPY</Segment>
-                                <Segment inverted>JPYUSD</Segment>
-                                <Segment inverted>Bilkl</Segment>
+                               {this.state.trackingActiveTrades.map(t  => {
+                                   return <Segment inverted> {t.pair}</Segment>
+                               })}
                             </Segment.Group>
                                <Header as='h1'  textAlign= 'center' attached='top' className="section-header">
                                 Open
                             </Header>
                             <Segment.Group inverted size = 'large'>
-                                <Segment inverted>EURUSD   <Divider  vertical/>  Buy</Segment>
-                                <Segment inverted>GBPUSD</Segment>
-                                <Segment inverted>EURJPY</Segment>
-                                <Segment inverted>JPYUSD</Segment>
-                                <Segment inverted>Bilkl</Segment>
+                                {this.state.openActiveTrades.map(t  => {
+                                   return <Segment inverted> {t.pair}</Segment>
+                               })}
                             </Segment.Group>
                        
                      </Grid.Column>

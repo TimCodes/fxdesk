@@ -40,8 +40,7 @@ class TradePortfolioStats extends Component {
                    </Segment>
                 </Grid.Column>
             </Grid.Row>
-           </Grid > 
-           
+           </Grid >        
       )    
     }
 }

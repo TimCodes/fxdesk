@@ -14,7 +14,6 @@ class TradeTrackerDetails extends Component {
         trades  : [],
         description: ''    
     }
-    console.log(this.props)
     
   }
 
@@ -35,7 +34,7 @@ class TradeTrackerDetails extends Component {
         trades : newTradeState,
         description : trade.description
     })
-    console.log("details props -- ", nextProps)
+
   }
 
 

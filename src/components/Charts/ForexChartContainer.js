@@ -24,8 +24,7 @@ class ForexChartContainer extends Component {
         }else{
             chartHeight  = 825;
         }
-   
-        
+             
         this.dataService    = getServiceContainer().data;
         this.pairClick      = this.pairClick.bind(this);
         this.timeFrameClick = this.timeFrameClick.bind(this);
@@ -52,7 +51,6 @@ class ForexChartContainer extends Component {
  
 
     componentWillMount(){
-        console.log('--- container paiers ----- ', this.state.pairs)
         let state = {};
 
         if(this.props.height){

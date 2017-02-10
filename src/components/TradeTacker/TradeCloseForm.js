@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button,  Dropdown, Grid, Header, Icon, Modal, Form, Checkbox, TextArea } from 'semantic-ui-react'
+import { Button,  Dropdown, Grid, Header, Icon, Modal, Form, Checkbox, TextArea, Select } from 'semantic-ui-react'
 import Dropzone from 'react-dropzone';
 import DatePicker from 'react-datepicker';
 import moment from 'moment'
@@ -12,16 +12,19 @@ class TradeCloseForm extends Component {
 
    constructor(props) {
     super(props);
-     this.state = { formData: {},
-    openDate: moment() ,
-    closeDate: moment()
+     this.state =
+            { formData: {
+             openDate: moment() ,
+            closeDate: moment()
+        },
+        resultOptions : [ {text: 'WIN', value: "WIN"} , {text: 'LOSS', value: "LOSS" }  ],
+        sideOptions : [ {text: 'BUY', value: "BUY"} , {text: 'SELL', value: "SELL" }  ]
+     
    };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
    
-    this.handleTextAreaChange = this.handleTextAreaChange.bind(this)
-    console.log("-- form props --", this.props)
-    
+    this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
   }
 
   handleSubmit = (e, { formData }) => {
@@ -32,48 +35,38 @@ class TradeCloseForm extends Component {
   }
 
   passData(){
-      console.log(this.state, "--- close form submit ----")
-      this.props.passData({...this.state.formData, closeDate : this.state.formData.closeDate.toString() });
+    this.props.passData(this.state.formData)
   }
 
+
   componentWillReceiveProps(nextProps, nextState){
-    // perform any preparations for an upcoming update
-    console.log("tadee form update hook")
-    console.log(nextProps)
+  
     if(nextProps.trade){
         this.setState({
             formData: nextProps.trade
         }, this.logChange)
     }
   }
-
-  logChange(){
-      console.log(this.state)
-  }
   
   handleChange = (e, { value }) => this.setState({ value })
 
   openDateChange = ( (d, e) =>  {  
-       console.log(d)
-      console.log("open date change")
       this.setState({ openDate: d } ) 
     })
 
   closeDateChange = ( (d, e) =>   {
-      console.log(d)
-      console.log("close date change")
-      this.setState({ formData: { closeDate:  d } } )
+      this.setState({  closeDate:  d  } )
    })
    
   handleTextAreaChange(e){
-      console.log(e.target.value)
+      
       this.setState({
           formData:{ description : e.target.value}
       })
   }
 
   render() { 
-    return (  
+    return ( 
             <Modal open = {this.props.showModal}>
                 <Modal.Header className = "section-header">Close Trade 
                     <span className ='close-btn' onClick ={this.props.hideModal}> X </span>
@@ -86,7 +79,11 @@ class TradeCloseForm extends Component {
                  </Form.Field>
                  <Form.Field>
                    <label>result</label>
-                   <input  value = {this.state.formData.result}  onChange = {this.handleChange} name = "result" />
+                     <Select 
+                        placeholder='WIN' options={this.state.resultOptions} 
+                        value = {this.state.formData.result} name = "result" onChange={this.handleChange} 
+                        className = "section-background"
+                   />
                  </Form.Field>
                  <Form.Field>
                    <label>Setup Type</label>
@@ -94,31 +91,33 @@ class TradeCloseForm extends Component {
                 </Form.Field>
                  <Form.Field>
                    <label>PnL</label>
-                   <input  value = {this.state.formData.PnL}  onChange = {this.handleChange} name = "PnL" />
+                   <input  value = {this.state.formData.PNL}  onChange = {this.handleChange} name = "PNL" />
                 </Form.Field>
                 <Form.Field>
                     <label>Side</label>
-                    <input name = "side" value = {this.state.formData.side}  onChange = {this.handleChange} />
+                     <Select   placeholder='BUY' options={this.state.sideOptions} 
+                        value = {this.state.formData.side} name = "side" onChange={this.handleChange} 
+                        className = "section-background"
+                        readonly
+                   />
                 </Form.Field>
                 <Form.Field>    
                     <label>Open DateTime</label>
-                    <DatePicker
-                    
+                    <DatePicker                    
                         selected = {this.state.openDate}
                         onChange={this.openDateChange} 
                         name = "openDate" 
                         id = "openDate"
                     />
-        
                  </Form.Field>
                  <Form.Field>
                     <label>Close DatTime</label>
                   <DatePicker
-                       selected = {this.state.formData.closeDate}
+                       selected = {this.state.closeDate}
                         onChange={this.closeDateChange} 
                         name = "closeDate" 
                         id = 'closeDate'
-                    />
+                  />
                  </Form.Field>
                 <Form.Field>
                 <TextArea label='Description' name = "description" 
@@ -128,8 +127,7 @@ class TradeCloseForm extends Component {
                 </Form.Field> 
                <Button  type='submit'>Submit</Button>
               </Form>
-               </Modal.Content>
-              
+               </Modal.Content>              
             </Modal>
         )    
     }
@@ -137,7 +135,3 @@ class TradeCloseForm extends Component {
 
 export default TradeCloseForm;
 
-
-//   <Dropzone >
-//                     <div>Try dropping some files here, or click to select files to upload.</div>
-//                </Dropzone>

@@ -28,18 +28,15 @@ class Dashboard extends Component {
     } 
 
     setTrades(){
-        console.log("--- set trades ----")
         this.setState({
             openActiveTrades: this.state.activeTrades.filter(t => t.status === "OPEN"),
             trackingActiveTrades: this.state.activeTrades.filter(t => t.status === "TRACKING")
         })
     }    
     render(){ 
-      console.log("--- dboard state ---", this.state)
         return (
-            
-                <Grid doubling columns={2} padded className = "padded-grid">
-                     <Grid.Column  computer = {10} >
+               <Grid doubling columns={2} padded className = "padded-grid">
+                    <Grid.Column  computer = {10} >
                             <Header as='h1'  textAlign= 'center' attached='top' className="section-header">
                               Charts
                            </Header>
@@ -66,8 +63,7 @@ class Dashboard extends Component {
                                    return <Segment inverted> {t.pair}</Segment>
                                })}
                             </Segment.Group>
-                       
-                     </Grid.Column>
+                      </Grid.Column>
                 </Grid>
             
          )    

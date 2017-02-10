@@ -24,7 +24,6 @@ class TradeTrackerForm extends Component {
   }
 
   passData(){
-      console.log(this.state.formData)
       this.props.passData(this.state.formData);
   }
 
@@ -35,16 +34,10 @@ class TradeTrackerForm extends Component {
         }, this.logChange)
     }
   }
-
-  logChange(){
-      console.log(this.state)
-  }
   
-  handleChange = (e, { value }) => this.setState({ value }, this.logChange)
-
+  handleChange = (e, { value }) => this.setState({ value })
 
   handleTextAreaChange(e){
-      console.log(e.target.value)
       this.setState({
           formData:{ description : e.target.value}
       })

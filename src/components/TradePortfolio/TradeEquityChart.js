@@ -49,17 +49,19 @@ class TradeEquityChart extends Component {
                             data={this.state.data}
                             xAccessor={d => d.date} xScaleProvider={discontinuousTimeScaleProvider}
                             xExtents={[new Date(2006, 0, 1), new Date(2006, 12, 2)]}>
-                        <Chart id={1}
-                                yExtents={d => [4000, 15000]}>
-                            <XAxis axisAt="bottom" orient="bottom"
-                                stroke= "white"
+                        <Chart 
+                                id={1}
+                                yExtents={d => [4000, 15000]}
+                         >
+                            <XAxis 
+                                 axisAt="bottom"
+                                 orient="bottom"
+                                 stroke= "white"
                                  tickStroke = "white"
                             />
                             <YAxis
                                 axisAt="right"
                                 orient="right"
-                                // tickInterval={5}
-                                // tickValues={[40, 60]}
                                 stroke= "white"
                                 tickStroke = "white"
                                 ticks={5}
@@ -70,9 +72,8 @@ class TradeEquityChart extends Component {
                                 displayFormat={timeFormat("%Y-%m-%d")} />
                             <MouseCoordinateY
                                 at="right"
-
-                                displayFormat={format(".2f")} />
-                        
+                                displayFormat={format(".2f")} 
+                            />
                             <AreaSeries
                                 yAccessor={(d) =>  d.equity}
                                 opacity={.3}

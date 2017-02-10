@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
-
-
 import ForexChartContainer from './components/Charts/ForexChartContainer';
 
 import TradeTracker        from './components/TradeTacker/TradeTracker';
@@ -10,12 +8,8 @@ import TradePortfolio      from './components/TradePortfolio/TradePortfolio';
 import TradeTool           from './components/TradeTool';
 import News                from './components/News';
 import Dashboard           from './components/Dashboard';
-// /import Portfolio           from './components/Portfolio';
 import EconomicCalender    from './components/EconomicCalender';
 import Main                from './components/Main';
-
-
-
 
 import './App.css';
 
@@ -37,9 +31,6 @@ class App extends Component{
     ) 
   }
 }
-
-// <CandleStickChart data={this.props.data} type={'hybrid'} />
-
 
 
 export default App;

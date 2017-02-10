@@ -27,16 +27,13 @@
 
         componentWillMount(){
 
-         this.setState({
-            trades     :  this.dataService.getTrades(),
-            lossCount  :  this.dataService.getLossCount(),
-            winCount   :  this.dataService.getWinCount(),
-            PnL        :  this.dataService.getPNL(),
-            maxDD      : this.dataService.getMaxDD()
-         })
-
-
-       
+            this.setState({
+                trades     :  this.dataService.getTrades(),
+                lossCount  :  this.dataService.getLossCount(),
+                winCount   :  this.dataService.getWinCount(),
+                PnL        :  this.dataService.getPNL(),
+                maxDD      : this.dataService.getMaxDD()
+            })
              
         }
 

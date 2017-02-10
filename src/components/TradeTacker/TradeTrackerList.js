@@ -46,16 +46,4 @@ class TradeTrackerList extends Component {
         }
     }
 
-    export default TradeTrackerList;
-
-
-/*
-
-
-       <Card.Description>
-            <Segment  inverted textAlign= 'center' className = 'trackingList'	>
-                 {t.status}
-            </Segment>         
-        </Card.Description>                     
-
-*/
+export default TradeTrackerList;

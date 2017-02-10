@@ -9,9 +9,7 @@ import TradeTrackerForm    from './TradeTrackerForm'
 import TradeCloseForm      from './TradeCloseForm'
 import TradeTrackerDetails from './TradeTrackerDetails';
 
-    // TODO : refactor fucntion naems foor 
-    // actions that just change view
-    // eg. close should be closeViewShow
+
 class TradeTracker extends Component {
 
         constructor(){
@@ -34,7 +32,7 @@ class TradeTracker extends Component {
 
             };
 
-            console.log(this.TradeDataService.convertPairString("EURUSD"))
+         
             this.showModalVis       = this.showModalVis.bind(this);
             this.hideModalVis       = this.hideModalVis.bind(this);
             this.hideDetailModal    = this.hideDetailModal.bind(this);
@@ -57,7 +55,6 @@ class TradeTracker extends Component {
         }
 
         showModalVis(){
-            console.log("set mdal vias")
             this.setState({
                 showFormModal: true
             })
@@ -82,7 +79,6 @@ class TradeTracker extends Component {
         }
 
         addTrade(trade){
-            console.log(trade)
             this.tradeTrackerService.create(trade);
             this.updateTradeList();
         }
@@ -90,7 +86,6 @@ class TradeTracker extends Component {
         updateTrade(trade, tradeIdx){
             this.tradeTrackerService.update(tradeIdx, trade)
             this.updateTradeList();
-            console.log("update trade ")
         }
 
         updateTradeList(){
@@ -101,15 +96,14 @@ class TradeTracker extends Component {
 
         handleSave(trade){
             if(this.state.tradeAction === "CREATE"){
-                this.addTrade(trade)   
+              this.addTrade(trade)   
             }else if(this.state.tradeAction === "EDIT"){
-                this.updateTrade(trade,this.state.tradeIdx)
+              this.updateTrade(trade,this.state.tradeIdx)
             }else if(this.state.tradeAction === "CLOSE"){
               this.TradeHistoryService.create(trade);
               this.tradeTrackerService.delete(this.state.tradeIdx);
               this.hideCloseFormModal()
             }
-
             this.hideModalVis();
         }
         
@@ -144,12 +138,8 @@ class TradeTracker extends Component {
             this.updateTradeList();
         }
      
-
-
         render(){ 
             return (
-        
-         
              <Grid doubling padded className = "padded-grid">
                    <Grid.Column width	= {16} >> 
                         <Icon  size='big' className='btn right-algn' name='plus' circular onClick={this.newTrade}></Icon>
@@ -157,9 +147,7 @@ class TradeTracker extends Component {
                             <span>Trade Tracker  </span><span> </span>
                         </Header>
                    </Grid.Column>
-                  
-
-                    <TradeTrackerList 
+                   <TradeTrackerList 
                         trades      ={this.state.data} 
                         editTrade   = {this.showEditTradeView}  
                         viewTrade   = {this.showViewTrade}
@@ -185,8 +173,6 @@ class TradeTracker extends Component {
                         trade      = {this.state.trade}
                         hideModal  = {this.hideDetailModal}
                     />
-
-              
                </Grid>  
               
 

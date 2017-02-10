@@ -11,7 +11,7 @@ class TradeTrackerService {
                 side: 'BUY'
             },
             {
-                pair: "GPBUSD",
+                pair: "GBPUSD",
                 status: "TRACKING",
                 setupType: "6x6",
                 description: "its a trade",
@@ -61,3 +61,4 @@ class TradeTrackerService {
 }
 
 export default TradeTrackerService;
+
